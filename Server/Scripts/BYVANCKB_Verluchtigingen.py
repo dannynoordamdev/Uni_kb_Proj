@@ -21,7 +21,7 @@ def insert_into_db(data, db_path):
     cursor = conn.cursor()
 
     insert_query = '''
-    INSERT OR IGNORE INTO Verluchtingen (
+    INSERT INTO Verluchtingen (
         RecordIdentifier, RecordPosition, Creator, HasPart, Thumbnail,
         Subject, Folio, Dimension, Title, IsPartOf, Relation, Spatial,
         Identifier, Date, Type, Illustration
@@ -29,34 +29,36 @@ def insert_into_db(data, db_path):
     '''
 
     for item in data:
-        record_identifier = prepare_value(item.get('recordIdentifier'))
+        # Grab the values directly from the JSON (no extra filtering)
+        record_identifier = prepare_value(item.get('recordIdentifier')) or ""
         record_position = int(item.get('recordPosition')) if item.get('recordPosition') else None
-        creator = prepare_value(item.get('creator'))
-        has_part = prepare_value(item.get('hasPart'))
-        thumbnail = prepare_value(item.get('thumbnail'))
-        subject = prepare_value(item.get('subject'))
+        creator = prepare_value(item.get('creator')) or ""
+        has_part = prepare_value(item.get('hasPart')) or ""
+        thumbnail = prepare_value(item.get('thumbnail')) or ""
+        subject = prepare_value(item.get('subject')) or ""
 
+        # Handling 'extent' and 'folio' as before
         extent = item.get('extent', [])
-        folio = None
-        dimension = None
+        folio = ""
+        dimension = ""
 
         for val in extent:
             val_str = str(val)
             if any(x in val_str for x in ['x', '×']) or val_str.replace(' ', '').isdigit():
-                dimension = prepare_value(val_str)
+                dimension = prepare_value(val_str) or ""
             else:
-                folio = prepare_value(val_str)
+                folio = prepare_value(val_str) or ""
 
+        title = prepare_value(item.get('title')) or ""
+        is_part_of = prepare_value(item.get('isPartOf')) or ""
+        relation = prepare_value(item.get('relation')) or ""
+        spatial = prepare_value(item.get('spatial')) or ""
+        identifier = prepare_value(item.get('identifier')) or ""
+        date = prepare_value(item.get('date')) or ""
+        type_ = prepare_value(item.get('type')) or ""
+        illustration = prepare_value(item.get('illustration')) or ""
 
-        title = prepare_value(item.get('title'))
-        is_part_of = prepare_value(item.get('isPartOf'))
-        relation = prepare_value(item.get('relation'))
-        spatial = prepare_value(item.get('spatial'))
-        identifier = prepare_value(item.get('identifier'))
-        date = prepare_value(item.get('date'))
-        type_ = prepare_value(item.get('type'))
-        illustration = prepare_value(item.get('illustration'))
-
+        # Insert into the database
         cursor.execute(insert_query, (
             record_identifier, record_position, creator, has_part, thumbnail,
             subject, folio, dimension, title, is_part_of, relation, spatial,

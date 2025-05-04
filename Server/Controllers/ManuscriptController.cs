@@ -1,8 +1,11 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-[ApiController]
 [Route("api/[controller]")]
+[ApiController]
 public class ManuscriptsController : ControllerBase
 {
     private readonly MyContext _context;
@@ -12,36 +15,49 @@ public class ManuscriptsController : ControllerBase
         _context = context;
     }
 
-    [HttpGet("{recordId}/illustrations")]
-    public async Task<IActionResult> GetIllustrationsForManuscript(string recordId)
+    // GET: api/Manuscripts
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<Manuscript>>> GetManuscripts()
     {
-        var manuscript = await _context.Manuscripts
-            .FirstOrDefaultAsync(m => m.RecordIdentifier == recordId);
+        return await _context.Manuscripts.ToListAsync();
+    }
+
+    // GET: api/Manuscripts/BYVANCK:3477
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Manuscript>> GetManuscript(string id)
+    {
+        var manuscript = await _context.Manuscripts.FindAsync(id);
 
         if (manuscript == null)
         {
             return NotFound();
         }
 
-        var verluchtingen = await _context.Verluchtingen
-            .Where(i => i.RecordIdentifier == recordId)
-            .ToListAsync();
-
-        return Ok(verluchtingen);
+        return manuscript;
     }
 
-    [HttpGet("manuscripts/sample")]
-public async Task<IActionResult> GetSampleManuscripts()
+
+
+    // Endpoint to get verluchtingen by IsPartOf identifier
+    [HttpGet("GetByIdentifier/{identifier}")]
+public async Task<IActionResult> GetByIdentifier(string identifier)
 {
-    var data = await _context.Manuscripts.Take(10).ToListAsync();
-    return Ok(data);
+    // Retrieve all verluchtingen from the database
+    var verluchtingen = await _context.Verluchtingen.ToListAsync();
+
+    // Filter the results on the client side using LINQ
+    var filteredVerluchtingen = verluchtingen
+        .Where(v => v.IsPartOf.Split(new[] { ';' })
+            .Any(part => part.Trim().Contains(identifier)))
+        .ToList();
+
+    if (filteredVerluchtingen == null || !filteredVerluchtingen.Any())
+    {
+        return NotFound($"No verluchtingen found for identifier: {identifier}");
+    }
+
+    return Ok(filteredVerluchtingen);
 }
 
-[HttpGet("illustrations/sample")]
-public async Task<IActionResult> GetSampleIllustrations()
-{
-    var data = await _context.Verluchtingen.Take(10).ToListAsync();
-    return Ok(data);
 }
 
-}
