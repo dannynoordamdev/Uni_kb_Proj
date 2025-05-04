@@ -11,7 +11,7 @@ public class MyContext : DbContext{
 
     // This sets up our tables inside the DB.
     public DbSet<Manuscript> Manuscripts { get; set;}
-    public DbSet<Verluchtiging> Verluchtigingen {get;set;}
+    public DbSet<Verluchting> Verluchtingen { get; set;}
 
 
 
