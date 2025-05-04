@@ -7,6 +7,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+builder.Services.AddDbContext<MyContext>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -16,17 +19,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// Setup CORS 
-builder.Services.AddCors(options =>{
-
-    options.AddPolicy("AllowReactApp", policy => {
-        // react running on port:
-        policy.WithOrigins("http://localhost:8110")
-        .AllowAnyHeader()
-        .AllowAnyMethod();
-    
-    });
-});
 
 app.UseCors("AllowReactApp");
 
