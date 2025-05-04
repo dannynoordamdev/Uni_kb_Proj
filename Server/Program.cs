@@ -16,10 +16,26 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// Setup CORS 
+builder.Services.AddCors(options =>{
+
+    options.AddPolicy("AllowReactApp", policy => {
+        // react running on port:
+        policy.WithOrigins("http://localhost:8110")
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+    
+    });
+});
+
+app.UseCors("AllowReactApp");
+
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+// Asp.net core running on port:
+app.Run("http://localhost:8111");
