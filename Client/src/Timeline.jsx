@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import './Timeline.css';
-import InputField from './InputField';
 
 const TimelineScroll = () => {
   const [animatedScrollY, setAnimatedScrollY] = useState(0);
@@ -117,6 +116,8 @@ const TimelineScroll = () => {
       className="timeline-container"
       style={{ backgroundColor: bgColor }}
     >
+
+      
       <div className="floating-card">
         <h2>Manuscript Title</h2>
 

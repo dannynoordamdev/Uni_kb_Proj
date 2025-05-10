@@ -4,9 +4,7 @@ from sqlalchemy import create_engine, Column, String, Table, MetaData
 from sqlalchemy.orm import sessionmaker
 import os
 
-# ============================
-# DATABASE SETUP
-# ============================
+
 db_path = r'C:\Users\danny\Documents\Uni_kb_Proj\Server\Medieval_Manuscripts.db'
 engine = create_engine(f"sqlite:///{db_path}")
 metadata = MetaData()
@@ -16,9 +14,7 @@ manuscripts_table = Table("Manuscripts", metadata, autoload_with=engine)
 Session = sessionmaker(bind=engine)
 session = Session()
 
-# ============================
-# XML OAI-PMH FETCHER
-# ============================
+
 
 BASE_URL = "http://services.kb.nl/mdo/oai"
 SET_NAME = "BYVANCK"
@@ -56,25 +52,22 @@ def parse_record(xml_elem):
         "Annotation": extract_single(xml_elem, "annotation", "dcx"),
         "Spatial": extract_single(xml_elem, "spatial", "dcterms"),
         "Date": "; ".join(extract_texts(xml_elem, "date")),
-        "Language": extract_single(xml_elem, "language") or "",  # Default to empty string if None
+        "Language": extract_single(xml_elem, "language") or "",  
         "Medium": extract_single(xml_elem, "medium", "dcterms") or "",
         "Format": extract_single(xml_elem, "format") or "",
         "Extent": extract_single(xml_elem, "extent", "dcterms") or "",
-        "Columns": None,  # Default to None if not set
-        "Lines": None,  # Default to None if not set
+        "Columns": None,  
+        "Lines": None, 
         "BindingDescription": extract_description_edge(xml_elem) or ""
     }
 
-    # Ensure 'Annotation' is not None
     if parsed.get("Annotation") is None:
-        parsed["Annotation"] = ""  # Set it to an empty string if None
+        parsed["Annotation"] = ""  
 
-    # Ensure 'Columns' and 'Lines' are not None
     if parsed["Columns"] is None:
-        parsed["Columns"] = ""  # Set to an empty string or some default value if None
+        parsed["Columns"] = "" 
     if parsed["Lines"] is None:
-        parsed["Lines"] = ""  # Same for Lines
-
+        parsed["Lines"] = ""  
     return parsed
 
 
@@ -100,7 +93,6 @@ def fetch_and_store():
                 dcx_elem = list(metadata_elem)[0]
                 parsed = parse_record(dcx_elem)
                 
-                # Extract columns + lines
                 for ext in dcx_elem.findall("dcterms:extent", NAMESPACES):
                     if ext.attrib.get("{http://www.w3.org/2001/XMLSchema-instance}type") == "columns":
                         parsed["Columns"] = ext.text.strip()
@@ -110,7 +102,6 @@ def fetch_and_store():
                 session.execute(manuscripts_table.insert().values(**parsed))
                 count += 1
 
-        # Handle resumption token
         token = root.find(".//oai:resumptionToken", NAMESPACES)
         if token is not None and token.text:
             params = {

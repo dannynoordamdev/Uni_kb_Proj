@@ -9,7 +9,6 @@ public class MyContext : DbContext{
         base.OnModelCreating(modelBuilder);
     }
 
-    // This sets up our tables inside the DB.
     public DbSet<Manuscript> Manuscripts { get; set;}
     public DbSet<Verluchting> Verluchtingen { get; set;}
 

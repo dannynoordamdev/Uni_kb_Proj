@@ -29,7 +29,6 @@ def insert_into_db(data, db_path):
     '''
 
     for item in data:
-        # Grab the values directly from the JSON (no extra filtering)
         record_identifier = prepare_value(item.get('recordIdentifier')) or ""
         record_position = int(item.get('recordPosition')) if item.get('recordPosition') else None
         creator = prepare_value(item.get('creator')) or ""
@@ -37,7 +36,6 @@ def insert_into_db(data, db_path):
         thumbnail = prepare_value(item.get('thumbnail')) or ""
         subject = prepare_value(item.get('subject')) or ""
 
-        # Handling 'extent' and 'folio' as before
         extent = item.get('extent', [])
         folio = ""
         dimension = ""
@@ -58,7 +56,6 @@ def insert_into_db(data, db_path):
         type_ = prepare_value(item.get('type')) or ""
         illustration = prepare_value(item.get('illustration')) or ""
 
-        # Insert into the database
         cursor.execute(insert_query, (
             record_identifier, record_position, creator, has_part, thumbnail,
             subject, folio, dimension, title, is_part_of, relation, spatial,
