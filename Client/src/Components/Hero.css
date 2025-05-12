@@ -1,0 +1,228 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    background-color: #f0f0f0;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-link {
+    display: flex; 
+    align-items: center;
+    text-decoration: none; 
+    color: inherit; 
+}
+
+.kb-logo-zw {
+    width: 10rem;
+}
+
+.hamburger-menu {
+    display: none; 
+    flex-direction: column;
+    justify-content: space-between;
+    width: 2rem;
+    height: 1.5rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.bar {
+    height: 0.25rem;
+    width: 100%;
+    background-color: #333; 
+    transition: all 0.3s ease-in-out;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center; 
+}
+
+.nav-link {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.hero-container {
+    position: relative;
+    color: white;
+    padding: 8rem 2rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-image: linear-gradient(to right, #273d5a, #122a46);
+    flex-grow: 1;
+}
+
+.hero-container::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 15vw;
+    background-color: #f0f0f0;
+    clip-path: polygon(0 100%, 100% 100%, 100% 0);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+    animation: fadeIn 1s ease-in-out;
+    max-width: 800px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    line-height: 1.5;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.219);
+}
+
+.hero-title {
+    font-size: 3.8rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    line-height: 1.2;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.226);
+}
+
+.hero-button {
+    background-color: #000;
+    color: white;
+    padding: 0.85rem 2.5rem;
+    font-size: 1.1rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.hero-button:hover {
+    background-color: #e4e4e4;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    color: #000;
+}
+
+.hero-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 1rem; 
+    }
+
+    .nav-links {
+        display: none; 
+        flex-direction: column;
+        position: absolute;
+        top: 3.5rem; 
+        left: 0;
+        background-color: #f0f0f0;
+        width: 100%;
+        text-align: center;
+        padding: 1rem 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 10; 
+    }
+
+    .nav-links.open {
+        display: flex; 
+    }
+
+    .nav-links.open a {
+        padding: 0.75rem 0;
+        color: #333;
+    }
+
+    .hamburger-menu {
+        display: flex; 
+    }
+
+    .hamburger-menu.open .bar:nth-child(1) {
+        transform: translateY(0.5rem) rotate(45deg);
+    }
+
+    .hamburger-menu.open .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger-menu.open .bar:nth-child(3) {
+        transform: translateY(-0.5rem) rotate(-45deg);
+    }
+
+    .kb-logo-zw {
+        width: 8rem; 
+    }
+
+    .hero-container {
+        padding: 5rem 1rem;
+        min-height: 450px;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+
+    .hero-container::after {
+        height: 20vw; 
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-container {
+        padding: 4rem 1rem;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .hero-button {
+        padding: 0.75rem 2rem;
+        font-size: 1rem;
+    }
+
+    .kb-logo-zw {
+        width: 6rem; 
+    }
+}

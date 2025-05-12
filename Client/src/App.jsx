@@ -1,14 +1,17 @@
-import React from 'react';
-import './App.css';
-import Timeline from './Timeline';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./Pages/Home";
+import "./App.css";
+
 
 function App() {
   return (
     <>
-    <Timeline/>
-
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </Router>
     </>
-      
       );
 }
 
