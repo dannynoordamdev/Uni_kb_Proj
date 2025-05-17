@@ -14,12 +14,7 @@ const Home = () => {
             <div className="full-width-section" id="home">
                 <Hero />
             </div> 
-
-            {/* Content van de timeline */}
-            <div className="section" id="timeline">
-                <Timeline />
-            </div>
-
+            
             {/* Content van de wereldkaart */}
             <div className="section" id="third-place">
                 <WorldMap />

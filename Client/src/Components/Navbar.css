@@ -187,44 +187,5 @@
     .kb-logo-zw {
         width: 8rem; 
     }
-
-    .hero-container {
-        padding: 5rem 1rem;
-        min-height: 450px;
-    }
-
-    .hero-title {
-        font-size: 2.5rem;
-    }
-
-    .hero-subtitle {
-        font-size: 1.2rem;
-    }
-
-    .hero-container::after {
-        height: 20vw; 
-    }
 }
 
-@media (max-width: 480px) {
-    .hero-container {
-        padding: 4rem 1rem;
-    }
-
-    .hero-title {
-        font-size: 2rem;
-    }
-
-    .hero-subtitle {
-        font-size: 1.1rem;
-    }
-
-    .hero-button {
-        padding: 0.75rem 2rem;
-        font-size: 1rem;
-    }
-
-    .kb-logo-zw {
-        width: 6rem; 
-    }
-}
