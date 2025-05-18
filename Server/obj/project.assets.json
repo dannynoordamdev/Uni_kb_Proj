@@ -4904,11 +4904,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\danny\\Documents\\Uni_kb_Proj\\Server\\Server.csproj",
+      "projectUniqueName": "C:\\Users\\danny\\OneDrive\\Desktop\\Uni_kb_Proj\\Server\\Server.csproj",
       "projectName": "Server",
-      "projectPath": "C:\\Users\\danny\\Documents\\Uni_kb_Proj\\Server\\Server.csproj",
+      "projectPath": "C:\\Users\\danny\\OneDrive\\Desktop\\Uni_kb_Proj\\Server\\Server.csproj",
       "packagesPath": "C:\\Users\\danny\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\danny\\Documents\\Uni_kb_Proj\\Server\\obj\\",
+      "outputPath": "C:\\Users\\danny\\OneDrive\\Desktop\\Uni_kb_Proj\\Server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\danny\\AppData\\Roaming\\NuGet\\NuGet.Config"

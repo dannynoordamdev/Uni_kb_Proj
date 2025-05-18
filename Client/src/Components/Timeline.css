@@ -6,22 +6,7 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  min-height: 90vh;
+  min-height: 100vh;
 }
 
-.timeline-scroll {
-  background-color: #eae9e9e0; 
-  backdrop-filter: blur(8px); 
-  border-radius: 32px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 2rem;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.572);
-  width: 95%;
-  scroll-behavior: smooth;
-  transition: scroll 2.5s ease-in-out;
-  scroll-snap-type: y mandatory;
-  -webkit-overflow-scrolling: touch;
-  transition: all 0.1s ease-in-out;
-}
 

@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import '../Components/Hero.css';
 import Navbar from './Navbar';
+import React from 'react';
 
 const Hero = () => {
     let navigate = useNavigate();
@@ -15,7 +16,7 @@ const Hero = () => {
                 <div className="hero-content">
                     <h1 className="hero-title">Middeleeuwse Handschriften<br />en Verluchtingen.</h1>
                     <p className="hero-subtitle">Bekijk bijzondere Manuscripten door middel van visualisaties.</p>
-                    <button onClick={timelineNavigate} className="hero-button">Begin met tijdreizen</button>
+                    <button onClick={timelineNavigate} className="hero-button">Verken de tijdlijn</button>
 
                 </div>
             </div>

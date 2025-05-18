@@ -16,4 +16,10 @@ public class ManuscriptsController : ControllerBase
         _context = context;
     }
 
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<Manuscript>>> GetManuscripts()
+    {
+        return await _context.Manuscripts.ToListAsync();
+    }
+
 }
