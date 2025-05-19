@@ -2,7 +2,7 @@ import React from 'react';
 import kbLogo from '../assets/kb-logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXTwitter, faLinkedinIn, faInstagram, faFacebookF } from '@fortawesome/free-brands-svg-icons';
-import './footer.css';
+import './Footer.css';
 
 const Footer = () => {
   return (

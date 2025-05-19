@@ -3,6 +3,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import './Timeline.css';
 
+
 const Timeline = () => {
   return (
     <>
