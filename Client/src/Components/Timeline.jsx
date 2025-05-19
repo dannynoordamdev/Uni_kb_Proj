@@ -40,7 +40,7 @@ const CarouselTimelineScroll = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch("/api/manuscripts")
+    fetch("http://localhost:8111/api/manuscripts")
       .then((res) => res.json())
       .then((data) => {
         const withYear = data
@@ -59,7 +59,7 @@ const CarouselTimelineScroll = () => {
     if (!m || verluchtingenMap[m.identifier] || verluchtingenLoading[m.identifier]) return;
     setVerluchtingenLoading((prev) => ({ ...prev, [m.identifier]: true }));
 
-    fetch(`/api/Verluchtingen/bymanuscript/${encodeURIComponent(m.identifier)}`)
+    fetch(`http://localhost:8111/api/Verluchtingen/bymanuscript/${encodeURIComponent(m.identifier)}`)
       .then((res) => res.json())
       .then((verl) => {
         setVerluchtingenMap((prev) => ({
