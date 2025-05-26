@@ -334,3 +334,17 @@ C:\Users\danny\OneDrive\Desktop\Uni_kb_Proj\Server\obj\Debug\net8.0\refint\Serve
 C:\Users\danny\OneDrive\Desktop\Uni_kb_Proj\Server\obj\Debug\net8.0\Server.pdb
 C:\Users\danny\OneDrive\Desktop\Uni_kb_Proj\Server\obj\Debug\net8.0\Server.genruntimeconfig.cache
 C:\Users\danny\OneDrive\Desktop\Uni_kb_Proj\Server\obj\Debug\net8.0\ref\Server.dll
+C:\Users\danny\OneDrive\Desktop\Uni_kb_Proj\Server\bin\Debug\net8.0\publish\publish\web.config
+C:\Users\danny\OneDrive\Desktop\Uni_kb_Proj\Server\bin\Debug\net8.0\publish\web.config
+C:\Users\danny\OneDrive\Desktop\Uni_kb_Proj\Server\bin\Debug\net8.0\publish\appsettings.Development.json
+C:\Users\danny\OneDrive\Desktop\Uni_kb_Proj\Server\bin\Debug\net8.0\publish\appsettings.json
+C:\Users\danny\OneDrive\Desktop\Uni_kb_Proj\Server\bin\Debug\net8.0\publish\Data\BYVANCK_manuscripts.json
+C:\Users\danny\OneDrive\Desktop\Uni_kb_Proj\Server\bin\Debug\net8.0\publish\Data\complete_dataset.json
+C:\Users\danny\OneDrive\Desktop\Uni_kb_Proj\Server\bin\Debug\net8.0\publish\publish\appsettings.Development.json
+C:\Users\danny\OneDrive\Desktop\Uni_kb_Proj\Server\bin\Debug\net8.0\publish\publish\appsettings.json
+C:\Users\danny\OneDrive\Desktop\Uni_kb_Proj\Server\bin\Debug\net8.0\publish\publish\Data\BYVANCK_manuscripts.json
+C:\Users\danny\OneDrive\Desktop\Uni_kb_Proj\Server\bin\Debug\net8.0\publish\publish\Data\complete_dataset.json
+C:\Users\danny\OneDrive\Desktop\Uni_kb_Proj\Server\bin\Debug\net8.0\publish\publish\Server.deps.json
+C:\Users\danny\OneDrive\Desktop\Uni_kb_Proj\Server\bin\Debug\net8.0\publish\publish\Server.runtimeconfig.json
+C:\Users\danny\OneDrive\Desktop\Uni_kb_Proj\Server\bin\Debug\net8.0\publish\Server.deps.json
+C:\Users\danny\OneDrive\Desktop\Uni_kb_Proj\Server\bin\Debug\net8.0\publish\Server.runtimeconfig.json
