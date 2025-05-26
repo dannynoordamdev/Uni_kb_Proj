@@ -1,223 +1,296 @@
-import React, { useState, useEffect, useRef } from 'react';
-import Navbar from './Navbar';
-import Footer from './Footer';
-import './Timeline.css';
+import React, { useEffect, useState, useRef, useCallback } from "react";
+import Modal from "react-modal";
+import { FaExpand } from "react-icons/fa";
+import "./Timeline.css";
+import Navbar from "./Navbar";
 
-const Timeline = () => {
-  const [manuscripts, setManuscripts] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
+Modal.setAppElement("#root");
+
+const FIELDS = [
+  { label: "Shelfmark", key: "identifier" },
+  { label: "Date", key: "date" },
+  { label: "Place", key: "spatial" },
+  { label: "Language", key: "language" },
+  { label: "Medium", key: "medium" },
+  { label: "Format", key: "format" },
+];
+
+const SECTION_WIDTH = window.innerWidth; // Each section fills the viewport
+const SMOOTHING = 0.9;
+
+function extractYear(dateStr) {
+  const match = dateStr?.match(/\d{4}/);
+  return match ? match[0] : null;
+}
+
+const CarouselTimelineScroll = () => {
+  const [allManuscripts, setAllManuscripts] = useState([]);
+  const [verluchtingenMap, setVerluchtingenMap] = useState({});
+  const [verluchtingenLoading, setVerluchtingenLoading] = useState({});
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [zoomImg, setZoomImg] = useState(null);
+  const [visibleIndex, setVisibleIndex] = useState(0);
+  const [animatedIndex, setAnimatedIndex] = useState(0);
 
-  // Verluchtingen state
-  const [verluchtingen, setVerluchtingen] = useState([]);
-  const [verluchtingenLoading, setVerluchtingenLoading] = useState(false);
-  const [verluchtingenError, setVerluchtingenError] = useState(null);
-  const [verluchtingIndex, setVerluchtingIndex] = useState(0);
-
-  // Afbeelding van het manuscript zelf (van Illustration in verluchting)
-  const [manuscriptImage, setManuscriptImage] = useState(null);
-
-  const scrollTimeout = useRef(null);
+  const rafId = useRef(null);
+  const targetIndex = useRef(0);
+  const currentAnimatedIndex = useRef(0);
+  const isTicking = useRef(false);
+  const scrollContainerRef = useRef(null);
 
   useEffect(() => {
-    fetch('/api/manuscripts')
-      .then(res => res.ok ? res.json() : Promise.reject('Failed to fetch'))
-      .then(data => {
-        setManuscripts(data.sort((a, b) => {
-          const getYear = (d) => parseInt(d?.match(/^(\d{4})/)?.[1]) || 0;
-          return getYear(a.date) - getYear(b.date);
-        }));
-        setLoading(false);
+    fetch("/api/manuscripts")
+      .then((res) => res.json())
+      .then((data) => {
+        const manuscripts = data
+          .map((m) => ({ ...m, year: extractYear(m.date) }))
+          .filter((m) => m.year && m.identifier)
+          .sort((a, b) => parseInt(a.year) - parseInt(b.year));
+        setAllManuscripts(manuscripts);
       })
-      .catch(err => {
-        setError(err.toString());
-        setLoading(false);
-      });
+      .finally(() => setLoading(false));
   }, []);
 
-  const currentManuscript = manuscripts[currentIndex];
-
-  // Ophalen verluchtingen bij manuscript-wissel
   useEffect(() => {
-    setVerluchtingIndex(0); // reset bij nieuw manuscript
-    setManuscriptImage(null); // reset afbeelding bij nieuw manuscript
+    const m = allManuscripts[visibleIndex];
+    if (!m || verluchtingenMap[m.identifier] || verluchtingenLoading[m.identifier]) return;
 
-    if (!currentManuscript?.identifier) {
-      setVerluchtingen([]);
+    setVerluchtingenLoading((prev) => ({ ...prev, [m.identifier]: true }));
+
+    fetch(`/api/Verluchtingen/bymanuscript/${encodeURIComponent(m.identifier)}`)
+      .then((res) => res.json())
+      .then((verl) => {
+        setVerluchtingenMap((prev) => ({
+          ...prev,
+          [m.identifier]: Array.isArray(verl) ? verl : [],
+        }));
+      })
+      .catch(() => {
+        setVerluchtingenMap((prev) => ({ ...prev, [m.identifier]: [] }));
+      })
+      .finally(() => {
+        setVerluchtingenLoading((prev) => {
+          const updated = { ...prev };
+          delete updated[m.identifier];
+          return updated;
+        });
+      });
+  }, [visibleIndex, allManuscripts, verluchtingenMap, verluchtingenLoading]);
+
+  // Listen to scroll on the container, now horizontal
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    const onScroll = () => {
+      const idx = Math.min(
+        allManuscripts.length - 1,
+        Math.max(0, Math.round(container.scrollLeft / SECTION_WIDTH))
+      );
+      setVisibleIndex(idx);
+      targetIndex.current = idx;
+
+      if (!isTicking.current && !rafId.current) {
+        isTicking.current = true;
+        rafId.current = requestAnimationFrame(animateCard);
+      }
+    };
+
+    container.addEventListener("scroll", onScroll, { passive: true });
+    return () => container.removeEventListener("scroll", onScroll);
+  }, [allManuscripts.length]);
+
+  const animateCard = useCallback(() => {
+    const diff = targetIndex.current - currentAnimatedIndex.current;
+    if (Math.abs(diff) < 0.01) {
+      currentAnimatedIndex.current = targetIndex.current;
+      setAnimatedIndex(currentAnimatedIndex.current);
+      rafId.current = null;
+      isTicking.current = false;
       return;
     }
-    setVerluchtingenLoading(true);
-    setVerluchtingenError(null);
-    fetch(`/api/verluchtingen/bymanuscript/${currentManuscript.identifier}`)
-      .then(res => res.ok ? res.json() : Promise.reject('Failed to fetch verluchtingen'))
-      .then(data => {
-        // Filter verluchtingen zonder afbeelding (thumbnail of identifier)
-        const filtered = data
-          .filter(v => (v.identifier))
-          .sort((a, b) => (a.recordPosition || 0) - (b.recordPosition || 0));
-        setVerluchtingen(filtered);
-        setVerluchtingenLoading(false);
+    currentAnimatedIndex.current += diff * SMOOTHING;
+    setAnimatedIndex(currentAnimatedIndex.current);
+    rafId.current = requestAnimationFrame(animateCard);
+  }, []);
 
-        // Pak de manuscript afbeelding uit de eerste verluchting als die een 'Illustration' property heeft
-        if (filtered.length > 0) {
-          // Illustration kan een url zijn in filtered[0].Illustration
-          // of als je een array of object hebt, pas aan naar jouw data-structuur
-          const illustration = filtered[0].Illustration || null;
-          setManuscriptImage(illustration);
-        } else {
-          setManuscriptImage(null);
-        }
-      })
-      .catch(err => {
-        setVerluchtingenError(err.toString());
-        setVerluchtingenLoading(false);
-        setManuscriptImage(null);
-      });
-  }, [currentManuscript?.identifier]);
+  useEffect(() => {
+    setAnimatedIndex(visibleIndex);
+    currentAnimatedIndex.current = visibleIndex;
+    targetIndex.current = visibleIndex;
+  }, [visibleIndex]);
 
-  // Scroll handler voor tijdlijn
-  const handleWheel = (e) => {
-    e.preventDefault();
-    if (scrollTimeout.current) return;
-    scrollTimeout.current = setTimeout(() => {
-      scrollTimeout.current = null;
-    }, 100);
-    setCurrentIndex((i) => {
-      if (e.deltaY > 0) return Math.min(i + 1, manuscripts.length - 1);
-      else return Math.max(i - 1, 0);
-    });
-  };
+  if (loading) return <div className="carousel-loading">Loading…</div>;
+  if (!allManuscripts.length) return <div className="carousel-loading">No manuscripts found.</div>;
 
-  // Carousel controls
-  const prevVerluchting = () => {
-    setVerluchtingIndex((i) =>
-      i === 0 ? verluchtingen.length - 1 : i - 1
-    );
-  };
-  const nextVerluchting = () => {
-    setVerluchtingIndex((i) =>
-      i === verluchtingen.length - 1 ? 0 : i + 1
-    );
-  };
+  const idx = Math.floor(animatedIndex);
+  const t = animatedIndex - idx;
+  const m = t < 0.5 || !allManuscripts[idx + 1] ? allManuscripts[idx] : allManuscripts[idx + 1];
+  const verluchtingen = (verluchtingenMap[m.identifier] || []).filter((v) => v.identifier);
 
-  // Skip verluchtingen waarvan de afbeelding niet laadt
-  const handleImageError = () => {
-    // Verwijder deze verluchting uit de lijst
-    setVerluchtingen((prev) => {
-      const newList = prev.filter((_, idx) => idx !== verluchtingIndex);
-      // Corrigeer index als nodig
-      if (verluchtingIndex >= newList.length) {
-        setVerluchtingIndex(Math.max(0, newList.length - 1));
-      }
-      return newList;
-    });
-  };
+  // --- Timeline Bar Calculations ---
+  const timelineBarWidth = 480; // px, adjust as desired
+  const timelineDotSize = 22;
+  const timelineLeftPad = 18;
+  const timelineRightPad = 18;
+  const dotPosition = allManuscripts.length > 1
+    ? timelineLeftPad + ((timelineBarWidth - timelineLeftPad - timelineRightPad) * (animatedIndex / (allManuscripts.length - 1)))
+    : timelineBarWidth / 2;
 
   return (
     <>
       <Navbar />
-      <div className="timeline-container">
-        <div className="timeline-header-row">
-          <h1>{currentManuscript?.date?.slice(0, 4) || '—'}</h1>
-          <div className="warn">
-            <p>Scroll verticaal om door de tijdlijn te bewegen.</p>
-          </div>
-        </div>
 
-        <div className="card-box">
-          <div className="timeline-card">
-            <h2>Manuscript</h2>
-            {loading && <p>Loading manuscripts...</p>}
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            {!loading && !error && currentManuscript ? (
-              <div>
-                {/* Manuscript afbeelding als die er is */}
-                {manuscriptImage && (
-                  <img
-                    src={manuscriptImage}
-                    alt={currentManuscript.title || 'Manuscript afbeelding'}
-                    className="verluchting-image-main"
-                    style={{ marginBottom: '1rem' }}
-                    onError={(e) => { e.currentTarget.style.display = 'none'; }}
-                  />
-                )}
-                <strong>{currentManuscript.title || 'Zonder titel'}</strong>
-                {currentManuscript.creator && <div><em>{currentManuscript.creator}</em></div>}
-                {currentManuscript.date && <div>{currentManuscript.date}</div>}
-                {currentManuscript.description && <div>{currentManuscript.description}</div>}
-              </div>
-            ) : (
-              <p>Geen manuscripten gevonden.</p>
-            )}
-          </div>
-
-          <div className="vertical-timeline" onWheel={handleWheel}>
-            <div className="timeline-line">
-              <div
-                className="timeline-indicator"
-                style={{
-                  top:
-                    manuscripts.length > 1
-                      ? `${(currentIndex / (manuscripts.length - 1)) * 100}%`
-                      : '0%',
-                }}
-              />
-            </div>
-          </div>
-
-          <div className="timeline-card">
-            <h2>Verluchtingen</h2>
-            {verluchtingenLoading && <p>Bezig met laden...</p>}
-            {verluchtingenError && <p style={{ color: 'red' }}>{verluchtingenError}</p>}
-            {!verluchtingenLoading && !verluchtingenError && verluchtingen.length === 0 && (
-              <p>Geen verluchtingen met afbeelding gevonden voor dit manuscript.</p>
-            )}
-            {!verluchtingenLoading && verluchtingen.length > 0 && (
-              <div className="verluchting-carousel">
-                <button
-                  className="carousel-btn"
-                  onClick={prevVerluchting}
-                  aria-label="Vorige"
-                >
-                  ◀
-                </button>
-                <div className="verluchting-carousel-content">
-                  <img
-                    src={verluchtingen[verluchtingIndex].identifier}
-                    alt={verluchtingen[verluchtingIndex].title || 'Verluchting'}
-                    className="verluchting-image-main"
-                    onError={handleImageError}
-                  />
-                  <div className="verluchting-main-info">
-                    <strong>{verluchtingen[verluchtingIndex].title || 'Zonder titel'}</strong>
-                    {verluchtingen[verluchtingIndex].folio && (
-                      <div>
-                        <em>Folio: {verluchtingen[verluchtingIndex].folio}</em>
-                      </div>
-                    )}
-                    {verluchtingen[verluchtingIndex].creator && (
-                      <div>{verluchtingen[verluchtingIndex].creator}</div>
-                    )}
-                  </div>
-                  <div className="carousel-indicator">
-                    {verluchtingIndex + 1} / {verluchtingen.length}
-                  </div>
+      <div className="carousel-outer clean" style={{
+        width: "100vw",
+        background: "#232323",
+        zIndex: 10,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "flex-start",
+        position: "relative",
+        overflow: "hidden" // This hides overflow!
+      }}>
+        <div
+          ref={scrollContainerRef}
+          className="manuscript-horizontal-scroll"
+          style={{
+            width: "100vw",
+            height: `calc(100vh - 100px)`,
+            overflowX: "auto",
+            overflowY: "hidden",
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            scrollSnapType: "x mandatory",
+            // Hide scrollbars if you want:
+            scrollbarWidth: "none",
+            msOverflowStyle: "none"
+          }}
+        >
+          {allManuscripts.map((manu, i) => (
+            <section
+              key={manu.identifier}
+              className="carousel-center double-card"
+              id={`manuscript-${i}`}
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                gap: "3vw",
+                background: "rgba(35,35,35,0.97)",
+                borderRadius: "32px",
+                padding: "2rem",
+                boxShadow: "0 8px 32px #0003",
+                minWidth: "100vw",
+                maxWidth: "100vw",
+                height: `calc(100vh - 180px)`,
+                marginRight: 0,
+                scrollSnapAlign: "center"
+              }}
+            >
+              {/* Manuscript Card */}
+              <div className="carousel-card" tabIndex={0} style={{ width: "46vw", maxWidth: 700 }}>
+                <div className="carousel-header">
+                  <span className="carousel-title">{manu.title || manu.id}</span>
                 </div>
-                <button
-                  className="carousel-btn"
-                  onClick={nextVerluchting}
-                  aria-label="Volgende"
-                >
-                  ▶
-                </button>
+                <div className="carousel-fields">
+                  {FIELDS.map((field) => manu[field.key] && (
+                    <div key={field.key} className="carousel-field">
+                      <span className="carousel-label">{field.label}:</span>
+                      <span className="carousel-value">{manu[field.key]}</span>
+                    </div>
+                  ))}
+                </div>
+                {manu.imageUrl && (
+                  <div className="carousel-img" style={{ height: 220 }}>
+                    <img src={manu.imageUrl} alt={manu.title || manu.id} />
+                  </div>
+                )}
+                {manu.provenance && (
+                  <div className="carousel-provenance">
+                    <span className="carousel-label">Provenance:</span>
+                    <span className="carousel-value">{manu.provenance}</span>
+                  </div>
+                )}
+                <div className="carousel-progress">{i + 1} / {allManuscripts.length}</div>
               </div>
-            )}
+              {/* Verluchtingen Card */}
+              <div className="verluchtingen-card clean" style={{ width: "46vw", maxWidth: 700 }}>
+                <div className="verluchtingen-header">
+                  <span className="verluchtingen-title">Verluchtingen</span>
+                  {(verluchtingenMap[manu.identifier] || []).length > 1 && (
+                    <span className="verluchtingen-count-pill">
+                      {(verluchtingenMap[manu.identifier] || []).length} images
+                    </span>
+                  )}
+                </div>
+                {verluchtingenLoading[manu.identifier] ? (
+                  <div className="verluchtingen-empty">Loading verluchtingen…</div>
+                ) : (verluchtingenMap[manu.identifier] || []).length === 0 ? (
+                  <div className="verluchtingen-empty">No verluchtingen with images for this manuscript.</div>
+                ) : (
+                  <div className="verluchting-vertical-scroll" style={{ maxHeight: "360px", overflowY: "auto", marginTop: "0.7rem", paddingRight: 8 }}>
+                    {(verluchtingenMap[manu.identifier] || []).filter((v) => v.identifier).map((v, vIdx) => (
+                      <div key={vIdx} className="verluchting-image-slide-v2" style={{ marginBottom: "1.2rem" }}>
+                        <div className="verluchting-image-maxbox-v2" onClick={() => setZoomImg(v.identifier)} tabIndex={0} style={{ cursor: "zoom-in", position: "relative" }}>
+                          <img src={v.identifier} alt={v.title || "Verluchting"} className="verluchting-big-img" draggable={false} />
+                          <span className="img-zoom-overlay"><FaExpand /> <span>Zoom</span></span>
+                        </div>
+                        <div className="verluchting-image-info-v2">
+                          {v.title && <div className="verluchting-image-title">{v.title}</div>}
+                          {v.folio && <div className="verluchting-image-folio">{v.folio}</div>}
+                          <div className="verluchting-image-progress">{vIdx + 1} / {(verluchtingenMap[manu.identifier] || []).length}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </section>
+          ))}
+        </div>
+
+        {/* Timeline Year Marker */}
+        <div style={{
+          position: "fixed",
+          left: "50%",
+          top: "11%",
+          transform: "translate(-50%, -50%)",
+          zIndex: 20,
+          pointerEvents: "none"
+        }}>
+          <div style={{
+            background: "#fff",
+            color: "#232323",
+            borderRadius: "22px",
+            padding: "10px 22px",
+            fontWeight: 700,
+            fontSize: "1.3rem",
+            boxShadow: "0 3px 12px rgba(0,0,0,0.13)",
+            opacity: 0.93
+          }}>
+            {m.year}
           </div>
         </div>
+
+        
       </div>
+
+      {/* Zoom functie */}
+      <Modal
+        isOpen={!!zoomImg}
+        onRequestClose={() => setZoomImg(null)}
+        contentLabel="Verluchting Image Zoom"
+        className="img-modal"
+        overlayClassName="img-modal-overlay"
+      >
+        {zoomImg && <img src={zoomImg} alt="Verluchting zoom" className="img-modal-img" />}
+        <button className="img-modal-close" onClick={() => setZoomImg(null)}>&times;</button>
+      </Modal>
     </>
   );
 };
 
-export default Timeline;
+export default CarouselTimelineScroll;
