@@ -98,7 +98,7 @@
 }
 
 /* Mobile styles */
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .footer {
     padding: 3rem 1.5rem;
   }
@@ -130,9 +130,13 @@
     margin-bottom: 1.5rem;
     min-width: 120px;
   }
+
+  .footer_hr{
+    width: 100%;
+  }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 500px) {
   .linksContainer {
     flex-direction: column;
     align-items: center;
@@ -142,5 +146,9 @@
   .linkColumn {
     width: 100%;
     max-width: 250px;
+  }
+
+  .footer_hr {
+    width: 100%;
   }
 }
