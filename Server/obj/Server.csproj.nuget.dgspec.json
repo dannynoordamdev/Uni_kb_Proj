@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\danny\\Documents\\Uni_kb_Proj\\Server\\Server.csproj": {}
+    "C:\\Users\\laksh\\OneDrive\\Bureaublad\\HR\\Project\\Project KB\\Uni_kb_Proj\\Server\\Server.csproj": {}
   },
   "projects": {
-    "C:\\Users\\danny\\Documents\\Uni_kb_Proj\\Server\\Server.csproj": {
+    "C:\\Users\\laksh\\OneDrive\\Bureaublad\\HR\\Project\\Project KB\\Uni_kb_Proj\\Server\\Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\danny\\Documents\\Uni_kb_Proj\\Server\\Server.csproj",
+        "projectUniqueName": "C:\\Users\\laksh\\OneDrive\\Bureaublad\\HR\\Project\\Project KB\\Uni_kb_Proj\\Server\\Server.csproj",
         "projectName": "Server",
-        "projectPath": "C:\\Users\\danny\\Documents\\Uni_kb_Proj\\Server\\Server.csproj",
-        "packagesPath": "C:\\Users\\danny\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\danny\\Documents\\Uni_kb_Proj\\Server\\obj\\",
+        "projectPath": "C:\\Users\\laksh\\OneDrive\\Bureaublad\\HR\\Project\\Project KB\\Uni_kb_Proj\\Server\\Server.csproj",
+        "packagesPath": "C:\\Users\\laksh\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\laksh\\OneDrive\\Bureaublad\\HR\\Project\\Project KB\\Uni_kb_Proj\\Server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\danny\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\laksh\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -91,7 +91,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.408/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.406/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
