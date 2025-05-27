@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import { FaExpand } from "react-icons/fa";
 import "./Timeline.css";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 Modal.setAppElement("#root");
 
@@ -15,8 +16,13 @@ const FIELDS = [
   { label: "Format", key: "format" },
 ];
 
-const SECTION_WIDTH = window.innerWidth; // Each section fills the viewport
-const SMOOTHING = 0.9;
+const SECTION_WIDTH = window.innerWidth; 
+const SMOOTHING = 0.1; // Higher = smoother but slower
+
+// --- HEIGHT CONSTANTS ---
+const NAVBAR_HEIGHT = 140;
+const TIMELINE_HEIGHT = 70; // Height of timeline bar + label
+const CARD_MARGIN = 24; // Optional margin below cards
 
 function extractYear(dateStr) {
   const match = dateStr?.match(/\d{4}/);
@@ -133,14 +139,10 @@ const CarouselTimelineScroll = () => {
   const timelineDotSize = 22;
   const timelineLeftPad = 18;
   const timelineRightPad = 18;
-  const dotPosition = allManuscripts.length > 1
-    ? timelineLeftPad + ((timelineBarWidth - timelineLeftPad - timelineRightPad) * (animatedIndex / (allManuscripts.length - 1)))
-    : timelineBarWidth / 2;
 
   return (
     <>
       <Navbar />
-
       <div className="carousel-outer clean" style={{
         width: "100vw",
         background: "#232323",
@@ -150,21 +152,118 @@ const CarouselTimelineScroll = () => {
         alignItems: "center",
         justifyContent: "flex-start",
         position: "relative",
-        overflow: "hidden" // This hides overflow!
+        overflow: "hidden"
       }}>
+        {/* Timeline Label */}
+        <div style={{
+          color: "#fff",
+          fontWeight: 700,
+          fontSize: "1.15rem",
+          letterSpacing: "0.08em",
+          marginTop: "2.2rem",
+          marginBottom: 6,
+          textAlign: "center"
+        }}>Timeline</div>
+
+        {/* Timeline Bar */}
+        <div
+          className="timeline-bar"
+          style={{
+            width: timelineBarWidth,
+            height: 36,
+            margin: "0 auto 12px auto",
+            position: "relative",
+            zIndex: 21,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            pointerEvents: "none"
+          }}
+        >
+          {/* Bar */}
+          <div
+            style={{
+              position: "absolute",
+              left: timelineLeftPad,
+              right: timelineRightPad,
+              top: "50%",
+              height: 6,
+              background: "#fff9",
+              borderRadius: 3,
+              transform: "translateY(-50%)",
+              boxShadow: "0 1px 6px #0002"
+            }}
+          />
+          {/* Dots */}
+          {allManuscripts.map((manu, i) => {
+            const isActive = Math.round(animatedIndex) === i;
+            return (
+              <div
+                key={manu.identifier}
+                style={{
+                  position: "absolute",
+                  left:
+                    timelineLeftPad +
+                    ((timelineBarWidth - timelineLeftPad - timelineRightPad) *
+                      (i / (allManuscripts.length - 1))),
+                  top: "50%",
+                  transform: "translate(-50%, -50%)",
+                  width: timelineDotSize,
+                  height: timelineDotSize,
+                  background: isActive ? "#e17b77" : "#fff",
+                  border: isActive ? "3px solid #e17b77" : "2px solid #bbb",
+                  borderRadius: "50%",
+                  boxShadow: isActive
+                    ? "0 2px 10px #e17b7755"
+                    : "0 1px 4px #0001",
+                  transition: "all 0.2s",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  zIndex: 2
+                }}
+              >
+                {/* Show year above active dot */}
+                {isActive && (
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: -38,
+                      left: "50%",
+                      transform: "translate(-50%, 0)",
+                      background: "#fff",
+                      color: "#232323",
+                      borderRadius: "22px",
+                      padding: "4px 14px",
+                      fontWeight: 700,
+                      fontSize: "1.05rem",
+                      boxShadow: "0 3px 12px rgba(0,0,0,0.13)",
+                      opacity: 0.98,
+                      pointerEvents: "none",
+                      whiteSpace: "nowrap"
+                    }}
+                  >
+                    {manu.year}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
         <div
           ref={scrollContainerRef}
           className="manuscript-horizontal-scroll"
           style={{
             width: "100vw",
-            height: `calc(100vh - 100px)`,
+            // Subtract navbar and timeline height!
+            height: `calc(100vh - ${NAVBAR_HEIGHT}px - ${TIMELINE_HEIGHT}px)`,
             overflowX: "auto",
             overflowY: "hidden",
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
             scrollSnapType: "x mandatory",
-            // Hide scrollbars if you want:
             scrollbarWidth: "none",
             msOverflowStyle: "none"
           }}
@@ -185,7 +284,8 @@ const CarouselTimelineScroll = () => {
                 boxShadow: "0 8px 32px #0003",
                 minWidth: "100vw",
                 maxWidth: "100vw",
-                height: `calc(100vh - 180px)`,
+                // Subtract navbar, timeline, and margin!
+                height: `calc(100vh - ${NAVBAR_HEIGHT}px - ${TIMELINE_HEIGHT}px - ${CARD_MARGIN}px)`,
                 marginRight: 0,
                 scrollSnapAlign: "center"
               }}
@@ -251,31 +351,6 @@ const CarouselTimelineScroll = () => {
             </section>
           ))}
         </div>
-
-        {/* Timeline Year Marker */}
-        <div style={{
-          position: "fixed",
-          left: "50%",
-          top: "11%",
-          transform: "translate(-50%, -50%)",
-          zIndex: 20,
-          pointerEvents: "none"
-        }}>
-          <div style={{
-            background: "#fff",
-            color: "#232323",
-            borderRadius: "22px",
-            padding: "10px 22px",
-            fontWeight: 700,
-            fontSize: "1.3rem",
-            boxShadow: "0 3px 12px rgba(0,0,0,0.13)",
-            opacity: 0.93
-          }}>
-            {m.year}
-          </div>
-        </div>
-
-        
       </div>
 
       {/* Zoom functie */}
@@ -289,6 +364,7 @@ const CarouselTimelineScroll = () => {
         {zoomImg && <img src={zoomImg} alt="Verluchting zoom" className="img-modal-img" />}
         <button className="img-modal-close" onClick={() => setZoomImg(null)}>&times;</button>
       </Modal>
+      <Footer />
     </>
   );
 };
