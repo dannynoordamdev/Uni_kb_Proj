@@ -6,7 +6,7 @@ import React from 'react';
 const Hero = () => {
     let navigate = useNavigate();
     const timelineNavigate = () => {
-        navigate('/timeline');
+        navigate('/tijdlijn');
     }
 
     return (

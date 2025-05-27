@@ -1,9 +1,8 @@
-import React from 'react';
-import Timeline from '../Components/Timeline';
 import WorldMap from '../Components/WorldMap';
 import Footer from '../Components/Footer';
 import Hero from '../Components/Hero';
 import '../Pages/Home.css';
+import React from 'react';
 
 
 const Home = () => {

@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home";
-import Timeline from "./Components/Timeline";
+import Timeline from "./Components/TimelinePage";
 import "./App.css";
 import React from "react";
 
@@ -11,7 +11,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/timeline" element={<Timeline />} />
+          <Route path="/tijdlijn" element={<Timeline />} />
 
         </Routes>
       </Router>
