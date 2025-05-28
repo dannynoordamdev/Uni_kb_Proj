@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import Modal from "react-modal";
 import { FaExpand } from "react-icons/fa";
-import "./Timeline.css"; // Zorg ervoor dat je de bijgewerkte CSS gebruikt
+import "./Timeline.css"; 
 
 Modal.setAppElement("#root");
 
@@ -41,7 +41,6 @@ const CarouselTimelineScroll = () => {
   const isTicking = useRef(false);
   const scrollContainerRef = useRef(null);
 
-  // --- Data Fetching ---
   useEffect(() => {
     fetch("/api/manuscripts")
       .then((res) => res.json())
@@ -86,13 +85,12 @@ const CarouselTimelineScroll = () => {
       });
   }, [visibleIndex, allManuscripts, verluchtingenMap, verluchtingenLoading]);
 
-  // --- Animation & Scrolling Logic ---
   const animateCard = useCallback(() => {
       const diff = targetIndex.current - currentAnimatedIndex.current;
       if (Math.abs(diff) < 0.01) {
         currentAnimatedIndex.current = targetIndex.current;
         setAnimatedIndex(currentAnimatedIndex.current);
-        cancelAnimationFrame(rafId.current); // Use cancelAnimationFrame
+        cancelAnimationFrame(rafId.current); 
         rafId.current = null;
         isTicking.current = false;
         return;
@@ -113,12 +111,11 @@ const CarouselTimelineScroll = () => {
         Math.max(0, Math.round(container.scrollLeft / SECTION_WIDTH))
       );
 
-      // Only update if index actually changes
       if (newIdx !== targetIndex.current) {
-         setVisibleIndex(newIdx); // Update visibleIndex for data fetching
-         targetIndex.current = newIdx; // Set target for animation
+         setVisibleIndex(newIdx); 
+         targetIndex.current = newIdx; 
 
-         if (!rafId.current) { // Start animation only if not running
+         if (!rafId.current) { 
             rafId.current = requestAnimationFrame(animateCard);
          }
       }
@@ -128,21 +125,19 @@ const CarouselTimelineScroll = () => {
     return () => {
        container.removeEventListener("scroll", onScroll);
        if (rafId.current) {
-           cancelAnimationFrame(rafId.current); // Clean up animation frame
+           cancelAnimationFrame(rafId.current); 
        }
     };
-  }, [allManuscripts.length, animateCard]); // Only depend on these
+  }, [allManuscripts.length, animateCard]); 
 
 
   useEffect(() => {
-    // This effect ensures the initial state and snaps match
     setAnimatedIndex(visibleIndex);
     currentAnimatedIndex.current = visibleIndex;
     targetIndex.current = visibleIndex;
   }, [visibleIndex]);
 
 
-  // --- Render Logic ---
   if (loading) return <div className="carousel-loading">Laden...</div>;
   if (!allManuscripts.length)
     return <div className="carousel-loading">Geen manuscripten gevonden.</div>;
@@ -209,7 +204,7 @@ const CarouselTimelineScroll = () => {
                 key={manu.identifier}
                 className="carousel-center double-card"
                 id={`manuscript-${i}`}
-                style={{ height: availableHeight }} // Set height here
+                style={{ height: availableHeight }} 
               >
                 {/* Kaart 1: Manuscripten */}
                 <div className="carousel-card" tabIndex={0}>

@@ -27,10 +27,10 @@
   overflow-y: hidden;
   display: flex;
   flex-direction: row;
-  align-items: flex-start; /* Lijn secties bovenaan uit */
+  align-items: flex-start; 
   scroll-snap-type: x mandatory;
-  scrollbar-width: none; /* Verberg scrollbar (Firefox) */
-  -ms-overflow-style: none; /* Verberg scrollbar (IE/Edge) */
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
 }
 .manuscript-horizontal-scroll::-webkit-scrollbar {
   display: none; /* Verberg scrollbar (Chrome/Safari) */
@@ -40,11 +40,10 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: stretch; /* BELANGRIJK: Rekt kaarten tot gelijke hoogte */
+  align-items: stretch; 
   gap: 3vw;
   min-width: 100vw;
   width: 100vw;
-  /* Hoogte wordt inline ingesteld */
   padding: 0 2vw; /* Ruimte aan de zijkanten */
   box-sizing: border-box;
   scroll-snap-align: center;
@@ -99,7 +98,7 @@
   background: #e17b77;
   border: 3px solid #e17b77;
   box-shadow: 0 2px 10px #e17b7755;
-  transform: translate(-50%, -50%) scale(1.1); /* Iets groter als actief */
+  transform: translate(-50%, -50%) scale(1.1); 
 }
 
 .timeline-year-popup {
@@ -118,16 +117,14 @@
   white-space: nowrap;
 }
 
-/* --- Card Styles (Manuscript & Verluchtingen) --- */
 .carousel-card,
 .verluchtingen-card.clean {
   background: #fff;
-  border-radius: 24px; /* Iets grotere radius */
+  border-radius: 24px; 
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   opacity: 0.98;
   font-family: 'Inter', 'Montserrat', Arial, sans-serif;
   color: #333;
-  /* Flexbox Setup */
   flex: 1 1 0; /* Neemt gelijke ruimte in */
   min-width: 0; /* Voorkomt flexbox problemen */
   display: flex;
@@ -135,10 +132,9 @@
   height: 100%; /* Vult de hoogte van .carousel-center */
   box-sizing: border-box;
   overflow: hidden; /* Voorkomt dat inhoud buiten de kaart komt */
-  padding: 1.8rem; /* Consistente padding */
+  padding: 1.8rem; 
 }
 
-/* --- Manuscript Card Specifics --- */
 .carousel-header {
   display: flex;
   align-items: baseline;
@@ -213,7 +209,6 @@
   flex-shrink: 0; /* Voorkom krimpen */
 }
 
-/* --- Verluchtingen Card Specifics --- */
 .verluchtingen-header {
   display: flex;
   align-items: center;
@@ -221,7 +216,7 @@
   border-bottom: 1px solid #ececec;
   margin-bottom: 1.4rem;
   padding-bottom: 0.7rem;
-  flex-shrink: 0; /* Voorkom krimpen */
+  flex-shrink: 0;
 }
 
 .verluchtingen-title {
@@ -249,16 +244,15 @@
   border-radius: 12px;
   border: 2px dashed #ddd;
   margin: 1rem;
-  flex: 1; /* Neemt ruimte in */
+  flex: 1; 
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* --- Scrollable Content Areas --- */
 .card-content-scrollable,
 .verluchtingen-grid-wrapper {
-  flex: 1 1 auto; /* BELANGRIJK: Maakt dit deel flexibel en laat het groeien */
+  flex: 1 1 auto; 
   overflow-y: auto; /* BELANGRIJK: Schakelt verticaal scrollen in */
   min-height: 0; /* BELANGRIJK: Nodig voor flexbox + overflow */
   padding-right: 10px; /* Ruimte voor scrollbar */
@@ -295,7 +289,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 1.2rem;
-  padding: 0.5rem 10px 1rem 0; /* Padding (rechts is al gecompenseerd) */
+  padding: 0.5rem 10px 1rem 0; 
 }
 
 .verluchtingen-grid-item {
@@ -319,7 +313,7 @@
 .verluchtingen-image-wrapper {
   position: relative;
   width: 100%;
-  height: 180px; /* Hersteld naar 180px zoals in origineel */
+  height: 180px; 
   overflow: hidden;
   background: #f8f8f8;
 }
