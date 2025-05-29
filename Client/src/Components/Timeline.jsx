@@ -10,12 +10,12 @@ Modal.setAppElement("#root");
 
 
 const FIELDS = [
-  { label: "Shelfmark", key: "identifier" },
-  { label: "Date", key: "date" },
-  { label: "Place", key: "spatial" },
-  { label: "Language", key: "language" },
+  { label: "Shelfmark KB", key: "identifier" },
+  { label: "Datum", key: "date" },
+  { label: "Plaats", key: "spatial" },
+  { label: "Taal", key: "language" },
   { label: "Medium", key: "medium" },
-  { label: "Format", key: "format" },
+  { label: "Formaat", key: "format" },
 ];
 
 const SECTION_WIDTH = window.innerWidth;
@@ -240,12 +240,21 @@ const CarouselTimelineScroll = () => {
                     </div>
                     {manu.provenance && (
                       <div className="carousel-provenance">
-                        <span className="carousel-label">Provenance:</span>
-                        <span className="carousel-value">
-                          {manu.provenance}
-                        </span>
+                        <span className="carousel-label">Herkomst:</span>
+                        <ul className="carousel-value" style={{ margin: 0, paddingLeft: "1em" }}>
+                          {manu.provenance
+                            .split(";")
+                            .map((item, idx) =>
+                              item.trim() ? (
+                                <li key={idx} style={{ listStyleType: "disc" }}>
+                                  {item.trim()}
+                                </li>
+                              ) : null
+                            )}
+                        </ul>
                       </div>
                     )}
+
                   </div>
                   <div className="carousel-progress">
                     {i + 1} / {allManuscripts.length}
@@ -258,7 +267,7 @@ const CarouselTimelineScroll = () => {
                         <span className="verluchtingen-title">Verluchtingen</span>
                         {currentVerluchtingen.length > 1 && (
                         <span className="verluchtingen-count-pill">
-                            {currentVerluchtingen.length} images
+                            Bevat meerdere verluchtingen
                         </span>
                         )}
                     </div>
@@ -275,7 +284,7 @@ const CarouselTimelineScroll = () => {
                         ) : (
                             <div className="verluchtingen-grid-container">
                                 {currentVerluchtingen
-                                .filter((v) => v.identifier)
+                                .filter((v) => v.identifier || v.illustration)
                                 .map((v, vIdx) => (
                                     <div
                                     key={vIdx}
@@ -286,7 +295,7 @@ const CarouselTimelineScroll = () => {
                                     >
                                     <div className="verluchtingen-image-wrapper">
                                         <img
-                                        src={v.identifier}
+                                        src={v.identifier || v.illustration}
                                         alt={v.title || "Verluchting"}
                                         className="verluchtingen-grid-image"
                                         draggable={false}
