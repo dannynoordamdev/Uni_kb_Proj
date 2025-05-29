@@ -3,6 +3,7 @@ import Home from "./Pages/Home";
 import Timeline from "./Components/TimelinePage";
 import "./App.css";
 import React from "react";
+import WorldMap from "./Components/WorldMap";
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/tijdlijn" element={<Timeline />} />
+        
 
         </Routes>
       </Router>

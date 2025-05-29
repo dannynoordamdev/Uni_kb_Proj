@@ -124,8 +124,14 @@
     transition: all 0.3s ease;
     border-radius: 4px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    
 
+}
+.space{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    gap: 1rem;
 }
 
 .hero-button:hover {
