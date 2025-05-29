@@ -1,7 +1,10 @@
+body,
+.carousel-outer.clean {
+  scroll-behavior: smooth;
+}
 
 
 .carousel-outer.clean {
-  background-image: linear-gradient(to right, #273d5a, #122a46);
   height: 100vh; /* Neem volledige viewport hoogte */
   display: flex;
   flex-direction: column;
@@ -9,7 +12,8 @@
   justify-content: flex-start;
   position: relative;
   overflow: hidden; /* Voorkom dat deze container scrollt */
-  color: #fff;
+  color: #222;
+  
 }
 
 .carousel-loading {
@@ -30,7 +34,10 @@
   align-items: flex-start; 
   scroll-snap-type: x mandatory;
   scrollbar-width: none; 
-  -ms-overflow-style: none; 
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+  
+
 }
 .manuscript-horizontal-scroll::-webkit-scrollbar {
   display: none; /* Verberg scrollbar (Chrome/Safari) */
@@ -41,13 +48,16 @@
   flex-direction: row;
   justify-content: center;
   align-items: stretch; 
-  gap: 3vw;
+  gap: 1vw;
   min-width: 100vw;
   width: 100vw;
   padding: 0 2vw; /* Ruimte aan de zijkanten */
   box-sizing: border-box;
   scroll-snap-align: center;
   flex-shrink: 0; /* Voorkom dat secties krimpen */
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  height: 80vh;
 }
 
 /* --- Timeline Bar --- */
@@ -74,7 +84,7 @@
   position: absolute;
   top: 50%;
   height: 6px;
-  background: #fff9;
+  background: #ddd; /* ipv #fff9 */
   border-radius: 3px;
   transform: translateY(-50%);
 }
@@ -117,11 +127,17 @@
   white-space: nowrap;
 }
 
+
+
+
+/* --- Cards --- */
+
+
 .carousel-card,
 .verluchtingen-card.clean {
   background: #fff;
   border-radius: 24px; 
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid #eaeaea; /* Zachte rand om het los te trekken van de achtergrond */
   opacity: 0.98;
   font-family: 'Inter', 'Montserrat', Arial, sans-serif;
   color: #333;
@@ -133,7 +149,17 @@
   box-sizing: border-box;
   overflow: hidden; /* Voorkomt dat inhoud buiten de kaart komt */
   padding: 1.8rem; 
+  height: auto;
+
 }
+
+.carousel-card:hover,
+.verluchtingen-card.clean:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.041);
+  transition: all 0.3s ease;
+}
+
 
 .carousel-header {
   display: flex;
@@ -188,17 +214,20 @@
 
 .carousel-provenance {
   margin-top: 1rem;
-  background: #f9f9f9;
   border-radius: 8px;
   padding: 0.8rem 1.2rem;
   font-size: 0.95rem;
-  color: #555;
   border-top: 1px solid #eee;
   display: flex;
   gap: 0.5em;
   align-items: flex-start;
-  margin-bottom: 1rem; /* Ruimte onder provenance */
+  margin-bottom: 1rem; 
+  background: #f0f3f5;
+  border-top: 1px solid #ddd;
+  color: #444;
 }
+
+
 
 .carousel-progress {
   text-align: right;
@@ -259,6 +288,7 @@
   margin-right: -10px; /* Compenseer padding */
   scrollbar-width: thin;
   scrollbar-color: #ccc #f0f0f0;
+  
 }
 
 .card-content-scrollable::-webkit-scrollbar,
@@ -299,9 +329,13 @@
   cursor: zoom-in;
   transition: all 0.25s ease-in-out;
   border: 1px solid #f0f0f0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.137);
   position: relative;
   outline: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  
+
+
 }
 
 .verluchtingen-grid-item:hover {

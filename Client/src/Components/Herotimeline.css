@@ -1,0 +1,21 @@
+.bodyy {
+    position: relative;
+    color: white;
+    text-align: center;
+   
+    overflow: hidden;
+    background-image: linear-gradient(to right, #273d5a, #122a46);
+    /* Add other styles as needed */
+}
+
+.bodyy::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 15vw;
+    background-color: #f0f0f0;
+    clip-path: polygon(0 100%, 100% 100%, 100% 0);
+    z-index: 1;
+}

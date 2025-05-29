@@ -24,10 +24,7 @@ const toggleMobileMenu = () => {
                             <div className="bar"></div>
                         </button>
                         <div className={`nav-links ${isMobileMenuOpen ? 'open' : ''}`} id="mobile-nav"> 
-                            <a href="#" className="nav-link">Handschriften</a>
-                            <a href="#" className="nav-link">Visualisaties</a>
-                            <a href="#" className="nav-link">Over ons</a>
-                            <a href="#" className="nav-link">Contact</a>
+                            <a href="https://kb.nl" className="nav-link">Bezoek de KB</a>
                         </div>
         </nav>
     );

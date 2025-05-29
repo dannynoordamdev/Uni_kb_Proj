@@ -5,6 +5,10 @@ import "./Timeline.css";
 
 Modal.setAppElement("#root");
 
+
+
+
+
 const FIELDS = [
   { label: "Shelfmark", key: "identifier" },
   { label: "Date", key: "date" },
@@ -19,7 +23,7 @@ const SMOOTHING = 0.1;
 
 const NAVBAR_HEIGHT = 140;
 const TIMELINE_HEIGHT = 70;
-const CARD_MARGIN_BOTTOM = 24; // Marge onder de kaarten
+const CARD_MARGIN_BOTTOM = 10; // Marge onder de kaarten
 
 function extractYear(dateStr) {
   const match = dateStr?.match(/\d{4}/);
@@ -148,11 +152,16 @@ const CarouselTimelineScroll = () => {
   const timelineRightPad = 18;
 
   // Bereken de hoogte voor de kaartencontainer
-  const availableHeight = `calc(100vh - ${NAVBAR_HEIGHT}px - ${TIMELINE_HEIGHT}px - ${CARD_MARGIN_BOTTOM}px)`;
-  const scrollContainerHeight = `calc(100vh - ${NAVBAR_HEIGHT}px - ${TIMELINE_HEIGHT}px)`;
+  const availableHeight = `calc(100vh - 150px)`;
+  const scrollContainerHeight = `calc(100vh - 150px)`;
+
+
+  
 
   return (
     <>
+
+    
       <div className="carousel-outer clean">
         {/* Timeline Header */}
         <div className="timeline-header-text">Tijdlijn</div>
