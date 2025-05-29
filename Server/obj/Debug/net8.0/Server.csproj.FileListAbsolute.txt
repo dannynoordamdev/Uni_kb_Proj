@@ -348,3 +348,4 @@ C:\Users\danny\OneDrive\Desktop\Uni_kb_Proj\Server\bin\Debug\net8.0\publish\publ
 C:\Users\danny\OneDrive\Desktop\Uni_kb_Proj\Server\bin\Debug\net8.0\publish\publish\Server.runtimeconfig.json
 C:\Users\danny\OneDrive\Desktop\Uni_kb_Proj\Server\bin\Debug\net8.0\publish\Server.deps.json
 C:\Users\danny\OneDrive\Desktop\Uni_kb_Proj\Server\bin\Debug\net8.0\publish\Server.runtimeconfig.json
+C:\Users\danny\OneDrive\Desktop\Uni_kb_Proj\Server\bin\Debug\net8.0\Scripts\manuscript_locations.json
