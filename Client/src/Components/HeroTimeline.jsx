@@ -17,10 +17,6 @@ const HeroTimeline = () => (
             position: "relative",
             overflow: "hidden",
             height: `calc(100vh - ${navbarHeight}px)`
-
-
-
-            
         }}
     >
         {/* Wig-vorm onderaan */}
@@ -51,17 +47,9 @@ const HeroTimeline = () => (
             }}
         >
             <h1 className="hero-title">Reis door de Tijd</h1>
-            <h2 className="hero-subtitle" style={{color: "#fff"}}>Manuscripten door de tijd heen.</h2>
-            <p
-                style={{
-                    fontSize: "1.35rem",
-                    fontWeight: 300,
-                    lineHeight: 1.7,
-                    textShadow: "0 1px 2px rgba(0, 0, 0, 0.2)",
-                }}
-            >
-                Bekijk welke manuscripten zich op de tijdlijn bevinden, en welke prachtige verluchtingen zich daarbij tonen.
-            </p>
+            <h2 className="hero-subtitle" style={{color: "#fff"}}>
+                Verken de geschiedenis aan de hand van unieke, gedigitaliseerde manuscripten
+            </h2>
             <button
                 onClick={scrollToNext}
                 className="hero-button"
@@ -69,7 +57,7 @@ const HeroTimeline = () => (
                     marginTop: "1.5rem",
                 }}
             >
-                Bekijk de tijdlijn ↓
+                Begin met tijdreizen ↓
             </button>
         </div>
     </section>

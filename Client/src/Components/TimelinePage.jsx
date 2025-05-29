@@ -18,7 +18,9 @@ const TimelinePage = () => {
                 <CarouselTimelineScroll />
             </div>
             
+            <div id="featured">
             <FeaturedManuscripts />
+            </div>
             <Footer />
         </div>
     );

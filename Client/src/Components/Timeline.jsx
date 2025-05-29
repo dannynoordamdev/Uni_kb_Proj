@@ -6,6 +6,16 @@ import "./Timeline.css";
 Modal.setAppElement("#root");
 
 
+const scrollToNext = () => {
+    const nextSection = document.getElementById("featured");
+    if (nextSection) {
+        const top = nextSection.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({
+            top: top + 100, 
+            behavior: "smooth"
+        });
+    }
+};
 
 
 
@@ -152,8 +162,8 @@ const CarouselTimelineScroll = () => {
   const timelineRightPad = 18;
 
   // Bereken de hoogte voor de kaartencontainer
-  const availableHeight = `calc(100vh - 150px)`;
-  const scrollContainerHeight = `calc(100vh - 150px)`;
+  const availableHeight = `calc(100vh - 200px)`;
+  const scrollContainerHeight = `calc(100vh - 200px)`;
 
 
   
@@ -290,7 +300,7 @@ const CarouselTimelineScroll = () => {
                                     key={vIdx}
                                     className="verluchtingen-grid-item"
                                     tabIndex={0}
-                                    onClick={() => setZoomImg(v.identifier)}
+                                    onClick={() => setZoomImg(v.identifier || v.illustration)}
                                     title="Click to zoom"
                                     >
                                     <div className="verluchtingen-image-wrapper">
@@ -332,6 +342,8 @@ const CarouselTimelineScroll = () => {
             );
           })}
         </div>
+        <p>Scroll horizontaal om door de tijdlijn te gaan.</p>
+        <button onClick={scrollToNext}>Verken de topstukken</button>
       </div>
 
       {/* Modal for Zooming */}
