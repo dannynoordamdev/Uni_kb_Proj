@@ -5,7 +5,6 @@ import "./Timeline.css";
 
 Modal.setAppElement("#root");
 
-
 const scrollToNext = () => {
     const nextSection = document.getElementById("featured");
     if (nextSection) {
@@ -16,8 +15,6 @@ const scrollToNext = () => {
         });
     }
 };
-
-
 
 const FIELDS = [
   { label: "Shelfmark KB", key: "identifier" },
@@ -30,10 +27,6 @@ const FIELDS = [
 
 const SECTION_WIDTH = window.innerWidth;
 const SMOOTHING = 0.1;
-
-const NAVBAR_HEIGHT = 140;
-const TIMELINE_HEIGHT = 70;
-const CARD_MARGIN_BOTTOM = 10; // Marge onder de kaarten
 
 function extractYear(dateStr) {
   const match = dateStr?.match(/\d{4}/);
@@ -114,7 +107,6 @@ const CarouselTimelineScroll = () => {
       rafId.current = requestAnimationFrame(animateCard);
   }, []);
 
-
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
@@ -144,13 +136,21 @@ const CarouselTimelineScroll = () => {
     };
   }, [allManuscripts.length, animateCard]); 
 
-
   useEffect(() => {
     setAnimatedIndex(visibleIndex);
     currentAnimatedIndex.current = visibleIndex;
     targetIndex.current = visibleIndex;
   }, [visibleIndex]);
 
+  const handleNav = (direction) => {
+    if (!scrollContainerRef.current) return;
+    let newIndex = visibleIndex + direction;
+    newIndex = Math.max(0, Math.min(allManuscripts.length - 1, newIndex));
+    scrollContainerRef.current.scrollTo({
+      left: newIndex * SECTION_WIDTH,
+      behavior: "smooth",
+    });
+  };
 
   if (loading) return <div className="carousel-loading">Laden...</div>;
   if (!allManuscripts.length)
@@ -165,16 +165,11 @@ const CarouselTimelineScroll = () => {
   const availableHeight = `calc(100vh - 200px)`;
   const scrollContainerHeight = `calc(100vh - 200px)`;
 
-
-  
-
   return (
     <>
-
-    
       <div className="carousel-outer clean">
         {/* Timeline Header */}
-        <div className="timeline-header-text">Tijdlijn</div>
+        <div className="timeline-header-text">Door de tijd heen</div>
 
         {/* Timeline Bar */}
         <div
@@ -208,7 +203,25 @@ const CarouselTimelineScroll = () => {
           })}
         </div>
 
-        {/* Horizontal Scroll Container */}
+        <div className="timeline-nav-buttons">
+          <button
+            onClick={() => handleNav(-1)}
+            disabled={visibleIndex === 0}
+            aria-label="Vorige"
+            className="timeline-nav-btn"
+          >
+            &lt;
+          </button>
+          <button
+            onClick={() => handleNav(1)}
+            disabled={visibleIndex === allManuscripts.length - 1}
+            aria-label="Volgende"
+            className="timeline-nav-btn"
+          >
+            &gt;
+          </button>
+        </div>
+
         <div
           ref={scrollContainerRef}
           className="manuscript-horizontal-scroll"
@@ -226,7 +239,8 @@ const CarouselTimelineScroll = () => {
                 style={{ height: availableHeight }} 
               >
                 {/* Kaart 1: Manuscripten */}
-                <div className="carousel-card" tabIndex={0}>
+                <div className="carousel-card" tabIndex={0}
+                >
                   <div className="carousel-header">
                     <span className="carousel-title">
                       {manu.title || manu.id}
@@ -342,10 +356,9 @@ const CarouselTimelineScroll = () => {
             );
           })}
         </div>
-        <p>Scroll horizontaal om door de tijdlijn te gaan.</p>
-        <button onClick={scrollToNext}>Verken de topstukken</button>
+        <p>Scroll horizontaal, of gebruik de navigatie knoppen om door de tijdlijn te gaan.</p>
+        
       </div>
-
       {/* Modal for Zooming */}
       <Modal
         isOpen={!!zoomImg}

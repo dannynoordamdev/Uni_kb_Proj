@@ -14,11 +14,6 @@ const Home = () => {
                 <Hero />
             </div> 
             
-            {/* Content van de wereldkaart */}
-            <div className="section" id="third-place">
-                <WorldMap />
-            </div>
-
             {/* Footer */}
             <div id="footer">
                 <Footer />

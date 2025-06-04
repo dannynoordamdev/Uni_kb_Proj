@@ -26,8 +26,7 @@ const Hero = () => {
                     <h1 className="hero-title">Middeleeuwse Handschriften<br />en Verluchtingen.</h1>
                     <p className="hero-subtitle">Bekijk bijzondere Manuscripten door middel van visualisaties.</p>
                     <div className="space">
-                    <button onClick={timelineNavigate} className="hero-button">Verken de tijdlijn</button>
-                    <button onClick={scrollToNext} className="hero-button">Manuscript in kaart</button>
+                    <button onClick={timelineNavigate} className="hero-button">Ontdek Manuscripten</button>
                     </div>
 
                 </div>

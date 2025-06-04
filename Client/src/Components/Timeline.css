@@ -13,6 +13,7 @@ body,
   position: relative;
   overflow: hidden; /* Voorkom dat deze container scrollt */
   color: #222;
+
   
 }
 
@@ -152,6 +153,23 @@ body,
   height: auto;
 
 }
+.timeline-nav-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.timeline-nav-btn {
+  font-size: 1.5rem;
+  background: #eee;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.timeline-nav-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 
 .carousel-card:hover,
 .verluchtingen-card.clean:hover {
@@ -252,12 +270,12 @@ body,
   font-size: 1.6rem;
   font-weight: 700;
   letter-spacing: 0.01em;
-  color: #e17b77;
+  color: #273d5a;
 }
 
 .verluchtingen-count-pill {
-  background: #f3e0e0;
-  color: #e17b77;
+  background: #81ade688;
+  color: #273d5a;
   border-radius: 999px;
   padding: 0.3em 1em;
   font-size: 1rem;
@@ -341,7 +359,7 @@ body,
 .verluchtingen-grid-item:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-  border-color: #e17b77;
+  border-color: #273d5a;
 }
 
 .verluchtingen-image-wrapper {
@@ -423,7 +441,7 @@ body,
 }
 
 .verluchtingen-item-index {
-  background: #e17b77;
+  background: #273d5a;
   color: white;
   border-radius: 12px;
   padding: 4px 8px;
@@ -472,7 +490,7 @@ body,
   position: absolute;
   top: -20px; /* Buiten de modal */
   right: -20px; /* Buiten de modal */
-  background: #e17b77;
+  background: #273d5a;
   color: #fff;
   border: 3px solid white;
   border-radius: 50%;

@@ -19,3 +19,44 @@
     clip-path: polygon(0 100%, 100% 100%, 100% 0);
     z-index: 1;
 }
+
+@media (max-width: 768px) {
+  .hero-vertical-container {
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+    height: auto; /* allow height to grow */
+  }
+  .hero-vertical-container > div {
+    max-width: 100% !important;
+    padding-right: 0 !important;
+    margin-bottom: 2rem;
+  }
+  .hero-vertical-container > div:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.hero-vertical-container .button{
+    background-color: #000;
+    color: white;
+    padding: 0.85rem 2.5rem;
+    font-size: 1.1rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+
+}
+.hero-vertical-container .button:hover {
+    background-color: #e4e4e4;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    color: #000;
+}
+
+.hero-vertical-container .button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
