@@ -230,8 +230,7 @@ const CarouselTimelineScroll = () => {
           {allManuscripts.map((manu, i) => {
              const currentVerluchtingen = verluchtingenMap[manu.identifier] || [];
              const isLoadingVerluchtingen = verluchtingenLoading[manu.identifier];
-
-            return (
+             return (
               <section
                 key={manu.identifier}
                 className="carousel-center double-card"
@@ -239,8 +238,7 @@ const CarouselTimelineScroll = () => {
                 style={{ height: availableHeight }} 
               >
                 {/* Kaart 1: Manuscripten */}
-                <div className="carousel-card" tabIndex={0}
-                >
+                <div className="carousel-card" tabIndex={0}>
                   <div className="carousel-header">
                     <span className="carousel-title">
                       {manu.title || manu.id}
@@ -278,7 +276,6 @@ const CarouselTimelineScroll = () => {
                         </ul>
                       </div>
                     )}
-
                   </div>
                   <div className="carousel-progress">
                     {i + 1} / {allManuscripts.length}

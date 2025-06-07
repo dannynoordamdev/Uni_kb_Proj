@@ -23,13 +23,11 @@ const TimelinePage = () => {
             <div style={{ height: "150px", backgroundColor: "F0F0F0" }}></div>
 
 
-            <WorldMap />
 
             <div style={{ height: "150px", backgroundColor: "F0F0F0" }}></div>
 
             
             <div id="featured">
-            <FeaturedManuscripts />
             </div>
             <Footer />
         </div>
