@@ -49,7 +49,7 @@ const CarouselTimelineScroll = () => {
   const scrollContainerRef = useRef(null);
 
   useEffect(() => {
-    fetch("/api/manuscripts")
+    fetch("https://api.northdev.xyz/api/manuscripts")
       .then((res) => res.json())
       .then((data) => {
         const manuscripts = data
@@ -72,7 +72,7 @@ const CarouselTimelineScroll = () => {
 
     setVerluchtingenLoading((prev) => ({ ...prev, [m.identifier]: true }));
 
-    fetch(`/api/Verluchtingen/bymanuscript/${encodeURIComponent(m.identifier)}`)
+    fetch(`https://api.northdev.xyz/api/Verluchtingen/bymanuscript/${encodeURIComponent(m.identifier)}`)
       .then((res) => res.json())
       .then((verl) => {
         setVerluchtingenMap((prev) => ({

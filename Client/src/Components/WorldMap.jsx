@@ -61,7 +61,7 @@ const WorldMap = () => {
   };
 
   useEffect(() => {
-    fetch("/api/manuscripts")
+    fetch("https://api.northdev.xyz/api/manuscripts")
       .then((res) => res.json())
       .then((data) => {
         const cleaned = data

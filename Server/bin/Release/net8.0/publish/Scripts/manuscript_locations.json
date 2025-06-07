@@ -1,0 +1,611 @@
+[
+  {
+    "original": "Cambray",
+    "cleaned": "Cambray",
+    "geocoded_address": "Cambray, Nades, Vichy, Allier, Auvergne-Rhône-Alpes, France métropolitaine, 03450, France",
+    "lat": 46.1512923,
+    "lon": 2.9584481
+  },
+  {
+    "original": "Western Germany(?)",
+    "cleaned": "Western Germany",
+    "geocoded_address": "Western, Versen, Meppen, Landkreis Emsland, Niedersachsen, 49716, Deutschland",
+    "lat": 52.7191724,
+    "lon": 7.2284994
+  },
+  {
+    "original": "Zutphen, Convent IJzendoorn, Tertiaries (?)",
+    "cleaned": "Zutphen",
+    "geocoded_address": "Zutphen, Gelderland, Nederland",
+    "lat": 52.1396933,
+    "lon": 6.194772
+  },
+  {
+    "original": "Loire valley",
+    "cleaned": "Loire valley",
+    "geocoded_address": "Val de Loire, Pays de la Loire, France métropolitaine, France",
+    "lat": 47.4492772,
+    "lon": -0.349549
+  },
+  {
+    "original": "Utrecht",
+    "cleaned": "Utrecht",
+    "geocoded_address": "Utrecht, Nederland",
+    "lat": 52.0907006,
+    "lon": 5.1215634
+  },
+  {
+    "original": "Limburg (Maastricht?)",
+    "cleaned": "Limburg",
+    "geocoded_address": "Limburg, Nederland",
+    "lat": 51.2015196,
+    "lon": 5.9046302
+  },
+  {
+    "original": "Maaseik, Convent of St. Agnes, Canonesses Regular",
+    "cleaned": "Maaseik",
+    "geocoded_address": "Maaseik, Limburg, Vlaanderen, 3680, België / Belgique / Belgien",
+    "lat": 51.0947181,
+    "lon": 5.791733
+  },
+  {
+    "original": "Diest, Alexians",
+    "cleaned": "Diest",
+    "geocoded_address": "Diest, Leuven, Vlaams-Brabant, België / Belgique / Belgien",
+    "lat": 50.9963227,
+    "lon": 5.054356
+  },
+  {
+    "original": "Tongeren",
+    "cleaned": "Tongeren",
+    "geocoded_address": "Tongeren, Tongeren-Borgloon, Tongeren, Limburg, 3700, België / Belgique / Belgien",
+    "lat": 50.7806267,
+    "lon": 5.4639172
+  },
+  {
+    "original": "Northern France",
+    "cleaned": "Northern France",
+    "geocoded_address": "Northern France Wildlife Tours, Rue du Pavillon, La Motte, Averton, Mayenne, Pays de la Loire, France métropolitaine, 53700, France",
+    "lat": 48.3316639,
+    "lon": -0.2235142
+  },
+  {
+    "original": "Hainaut",
+    "cleaned": "Hainaut",
+    "geocoded_address": "Hainaut, Wallonie, België / Belgique / Belgien",
+    "lat": 50.36192,
+    "lon": 4.125217
+  },
+  {
+    "original": "Paris",
+    "cleaned": "Paris",
+    "geocoded_address": "Paris, Île-de-France, France métropolitaine, France",
+    "lat": 48.8534951,
+    "lon": 2.3483915
+  },
+  {
+    "original": "France",
+    "cleaned": "France",
+    "geocoded_address": "France",
+    "lat": 46.603354,
+    "lon": 1.8883335
+  },
+  {
+    "original": "Flanders",
+    "cleaned": "Flanders",
+    "geocoded_address": "Vlaanderen, België / Belgique / Belgien",
+    "lat": 51.0962462,
+    "lon": 4.1786291
+  },
+  {
+    "original": "Malines (?)",
+    "cleaned": "Malines",
+    "geocoded_address": "Mechelen, Antwerpen, Vlaanderen, België / Belgique / Belgien",
+    "lat": 51.0281381,
+    "lon": 4.4803453
+  },
+  {
+    "original": "Central France",
+    "cleaned": "Central France",
+    "geocoded_address": "Central, Rue du Colonel Colonna d'Ornano, Quartier Necker, Paris 15e Arrondissement, Paris, France métropolitaine, 75015, France",
+    "lat": 48.8443928,
+    "lon": 2.3049266
+  },
+  {
+    "original": "North Holland (Amsterdam?)",
+    "cleaned": "North Holland",
+    "geocoded_address": "Noord-Holland, Nederland",
+    "lat": 52.7212825,
+    "lon": 4.820665
+  },
+  {
+    "original": "Southern Netherlands",
+    "cleaned": "Southern Netherlands",
+    "geocoded_address": "Netherlands Street, San Antonio Valley 10 and 11, Don Bosco, Parañaque District 2, Parañaque, Southern Manila District, Metro Manila, 1711, Philippines",
+    "lat": 14.4779849,
+    "lon": 121.0341857
+  },
+  {
+    "original": "Egmond, Monastery #, Benedictines",
+    "cleaned": "Egmond",
+    "geocoded_address": "Egmond, Boxmeer, Land van Cuijk, Noord-Brabant, Nederland, 5831 TN, Nederland",
+    "lat": 51.6530723,
+    "lon": 5.9400644
+  },
+  {
+    "original": "Lille",
+    "cleaned": "Lille",
+    "geocoded_address": "Lille, Nord, Hauts-de-France, France métropolitaine, France",
+    "lat": 50.6365654,
+    "lon": 3.0635282
+  },
+  {
+    "original": "Northern Netherlands",
+    "cleaned": "Northern Netherlands",
+    "geocoded_address": "Netherlands Park, Kilwee, Lisburn, County Antrim, Northern Ireland / Tuaisceart Éireann, BT17 0SA, United Kingdom",
+    "lat": 54.5590869,
+    "lon": -6.0149576
+  },
+  {
+    "original": "Italy",
+    "cleaned": "Italy",
+    "geocoded_address": "Italia",
+    "lat": 42.6384261,
+    "lon": 12.674297
+  },
+  {
+    "original": "Maastricht",
+    "cleaned": "Maastricht",
+    "geocoded_address": "Maastricht, Limburg, Nederland",
+    "lat": 50.8579855,
+    "lon": 5.6969882
+  },
+  {
+    "original": "Haarlem(?)",
+    "cleaned": "Haarlem",
+    "geocoded_address": "Haarlem, Noord-Holland, Nederland",
+    "lat": 52.3837058,
+    "lon": 4.6435597
+  },
+  {
+    "original": "Leyden",
+    "cleaned": "Leyden",
+    "geocoded_address": "Town of Leyden, Lewis County, New York, United States",
+    "lat": 43.5339571,
+    "lon": -75.378872
+  },
+  {
+    "original": "Diocese Tournai",
+    "cleaned": "Diocese Tournai",
+    "geocoded_address": "Diocèse de Tournai, Hainaut, Wallonie, België / Belgique / Belgien",
+    "lat": 50.36192,
+    "lon": 4.125217
+  },
+  {
+    "original": "Groningen, Monastery Selwerd, Benedictinesses",
+    "cleaned": "Groningen",
+    "geocoded_address": "Groningen, Nederland",
+    "lat": 53.2190652,
+    "lon": 6.5680077
+  },
+  {
+    "original": "Auvergne(?)",
+    "cleaned": "Auvergne",
+    "geocoded_address": "Auvergne No. 76, Saskatchewan, Canada",
+    "lat": 49.6522098,
+    "lon": -107.443137
+  },
+  {
+    "original": "Tours",
+    "cleaned": "Tours",
+    "geocoded_address": "Tours, Indre-et-Loire, Centre-Val de Loire, France métropolitaine, France",
+    "lat": 47.3900474,
+    "lon": 0.6889268
+  },
+  {
+    "original": "South Holland",
+    "cleaned": "South Holland",
+    "geocoded_address": "South Holland, Thornton Township, Cook County, Illinois, 60473, United States",
+    "lat": 41.6008681,
+    "lon": -87.6069894
+  },
+  {
+    "original": "Lombardy",
+    "cleaned": "Lombardy",
+    "geocoded_address": "Lombardia, Italia",
+    "lat": 45.5703694,
+    "lon": 9.7732524
+  },
+  {
+    "original": "Delft",
+    "cleaned": "Delft",
+    "geocoded_address": "Delft, Zuid-Holland, Nederland",
+    "lat": 51.9994572,
+    "lon": 4.3627245
+  },
+  {
+    "original": "Diocese Liège (Maastricht?)",
+    "cleaned": "Diocese Liège",
+    "geocoded_address": "Diocèse de Liège, Liège, Wallonie, België / Belgique / Belgien",
+    "lat": 50.4708159,
+    "lon": 5.7735459
+  },
+  {
+    "original": "Bourges",
+    "cleaned": "Bourges",
+    "geocoded_address": "Bourges, Cher, Centre-Val de Loire, France métropolitaine, 18000, France",
+    "lat": 47.0811658,
+    "lon": 2.399125
+  },
+  {
+    "original": "England",
+    "cleaned": "England",
+    "geocoded_address": "England, United Kingdom",
+    "lat": 52.5310214,
+    "lon": -1.2649062
+  },
+  {
+    "original": "St. Trond",
+    "cleaned": "St. Trond",
+    "geocoded_address": "Sint-Truiden, Hasselt, Limburg, België / Belgique / Belgien",
+    "lat": 50.8152784,
+    "lon": 5.1858896
+  },
+  {
+    "original": "Netelhorst(Guelders)",
+    "cleaned": "Netelhorst",
+    "geocoded_address": "Netelhorst I, Hattem, Gelderland, Nederland",
+    "lat": 52.4853688,
+    "lon": 6.0418899
+  },
+  {
+    "original": "Liège, Diocese (Tongres?)",
+    "cleaned": "Liège",
+    "geocoded_address": "Liège, Wallonie, 4000, België / Belgique / Belgien",
+    "lat": 50.6450944,
+    "lon": 5.5736112
+  },
+  {
+    "original": "Arras",
+    "cleaned": "Arras",
+    "geocoded_address": "Arras, Pas-de-Calais, Hauts-de-France, France métropolitaine, 62000, France",
+    "lat": 50.291048,
+    "lon": 2.7772211
+  },
+  {
+    "original": "Hagenau (Alsace)",
+    "cleaned": "Hagenau",
+    "geocoded_address": "Haguenau, Haguenau-Wissembourg, Bas-Rhin, Grand Est, France métropolitaine, 67500, France",
+    "lat": 48.8172236,
+    "lon": 7.7885978
+  },
+  {
+    "original": "Brabant",
+    "cleaned": "Brabant",
+    "geocoded_address": "Brabant, Wayne County, West Virginia, United States",
+    "lat": 38.1153687,
+    "lon": -82.3173679
+  },
+  {
+    "original": "Bruges",
+    "cleaned": "Bruges",
+    "geocoded_address": "Brugge, West-Vlaanderen, België / Belgique / Belgien",
+    "lat": 51.2085526,
+    "lon": 3.226772
+  },
+  {
+    "original": "Autun(?)",
+    "cleaned": "Autun",
+    "geocoded_address": "Autun, Saône-et-Loire, Bourgogne-Franche-Comté, France métropolitaine, 71400, France",
+    "lat": 46.9510313,
+    "lon": 4.2989478
+  },
+  {
+    "original": "Brussels",
+    "cleaned": "Brussels",
+    "geocoded_address": "Bruxelles - Brussel, Brussel-Hoofdstad - Bruxelles-Capitale, Région de Bruxelles-Capitale - Brussels Hoofdstedelijk Gewest, België / Belgique / Belgien",
+    "lat": 50.8465573,
+    "lon": 4.351697
+  },
+  {
+    "original": "Meuse region(?)",
+    "cleaned": "Meuse region",
+    "geocoded_address": "La Meuse, Rivière, Profondeville, Namur, Wallonie, 5170, België / Belgique / Belgien",
+    "lat": 50.3585685,
+    "lon": 4.8745005
+  },
+  {
+    "original": "Oudenaarde",
+    "cleaned": "Oudenaarde",
+    "geocoded_address": "Oudenaarde, Oost-Vlaanderen, Vlaanderen, 9700, België / Belgique / Belgien",
+    "lat": 50.8433705,
+    "lon": 3.6041443
+  },
+  {
+    "original": "St. Omer, Abbey of St. Bertin, Benedictines",
+    "cleaned": "St. Omer",
+    "geocoded_address": "Saint-Omer, Pas-de-Calais, Hauts-de-France, France métropolitaine, 62500, France",
+    "lat": 50.7515771,
+    "lon": 2.2534183
+  },
+  {
+    "original": "Besançon",
+    "cleaned": "Besançon",
+    "geocoded_address": "Besançon, Doubs, Bourgogne-Franche-Comté, France métropolitaine, 25000, France",
+    "lat": 47.2380222,
+    "lon": 6.0243622
+  },
+  {
+    "original": "Ham",
+    "cleaned": "Ham",
+    "geocoded_address": "Ham, Péronne, Somme, Hauts-de-France, France métropolitaine, 80400, France",
+    "lat": 49.746322,
+    "lon": 3.0733031
+  },
+  {
+    "original": "Mons (Hainaut)",
+    "cleaned": "Mons",
+    "geocoded_address": "Mons, Hainaut, Wallonie, België / Belgique / Belgien",
+    "lat": 50.4549568,
+    "lon": 3.951958
+  },
+  {
+    "original": "Brugge",
+    "cleaned": "Brugge",
+    "geocoded_address": "Brugge, West-Vlaanderen, België / Belgique / Belgien",
+    "lat": 51.2085526,
+    "lon": 3.226772
+  },
+  {
+    "original": "Tournai(?)",
+    "cleaned": "Tournai",
+    "geocoded_address": "Tournai, Tournai-Mouscron, Hainaut, Wallonie, België / Belgique / Belgien",
+    "lat": 50.6056458,
+    "lon": 3.3878179
+  },
+  {
+    "original": "Ghent(?)",
+    "cleaned": "Ghent",
+    "geocoded_address": "Gent, Oost-Vlaanderen, Vlaanderen, België / Belgique / Belgien",
+    "lat": 51.0538286,
+    "lon": 3.7250121
+  },
+  {
+    "original": "Naples",
+    "cleaned": "Naples",
+    "geocoded_address": "Napoli, Campania, Italia",
+    "lat": 40.8358846,
+    "lon": 14.2487679
+  },
+  {
+    "original": "Holland",
+    "cleaned": "Holland",
+    "geocoded_address": "Nederland",
+    "lat": 52.2434979,
+    "lon": 5.6343227
+  },
+  {
+    "original": "Troyes",
+    "cleaned": "Troyes",
+    "geocoded_address": "Troyes, Aube, Grand Est, France métropolitaine, 10000, France",
+    "lat": 48.2971626,
+    "lon": 4.0746257
+  },
+  {
+    "original": "Savoy",
+    "cleaned": "Savoy",
+    "geocoded_address": "Savoie, Auvergne-Rhône-Alpes, France métropolitaine, France",
+    "lat": 45.4948952,
+    "lon": 6.3846604
+  },
+  {
+    "original": "Soissons(?)",
+    "cleaned": "Soissons",
+    "geocoded_address": "Soissons, Aisne, Hauts-de-France, France métropolitaine, 02200, France",
+    "lat": 49.3837621,
+    "lon": 3.327613
+  },
+  {
+    "original": "Rouen",
+    "cleaned": "Rouen",
+    "geocoded_address": "Rouen, Seine-Maritime, Normandie, France métropolitaine, France",
+    "lat": 49.4404591,
+    "lon": 1.0939658
+  },
+  {
+    "original": "Zwolle, (`Sarijs'-group)",
+    "cleaned": "Zwolle",
+    "geocoded_address": "Zwolle, Overijssel, Nederland",
+    "lat": 52.5145653,
+    "lon": 6.0977204
+  },
+  {
+    "original": "Northern(?) Italy",
+    "cleaned": "Northern",
+    "geocoded_address": "Northern Region, Ghana",
+    "lat": 9.6600005,
+    "lon": -0.3943799
+  },
+  {
+    "original": "Emilia-Romagna(?)",
+    "cleaned": "Emilia-Romagna",
+    "geocoded_address": "Emilia-Romagna, Italia",
+    "lat": 44.525696,
+    "lon": 11.039437
+  },
+  {
+    "original": "Cologne",
+    "cleaned": "Cologne",
+    "geocoded_address": "Cologne, Condom, Gers, Occitanie, France métropolitaine, 32430, France",
+    "lat": 43.7218277,
+    "lon": 0.9774958
+  },
+  {
+    "original": "Amiens",
+    "cleaned": "Amiens",
+    "geocoded_address": "Amiens, Somme, Hauts-de-France, France métropolitaine, France",
+    "lat": 49.8941708,
+    "lon": 2.2956951
+  },
+  {
+    "original": "Verona",
+    "cleaned": "Verona",
+    "geocoded_address": "Verona, Veneto, Italia",
+    "lat": 45.4424977,
+    "lon": 10.9857377
+  },
+  {
+    "original": "Enghien",
+    "cleaned": "Enghien",
+    "geocoded_address": "Enghien, Ath, Hainaut, Wallonie, België / Belgique / Belgien",
+    "lat": 50.6957066,
+    "lon": 4.0411928
+  },
+  {
+    "original": "Valenciennes",
+    "cleaned": "Valenciennes",
+    "geocoded_address": "Valenciennes, Nord, Hauts-de-France, France métropolitaine, 59300, France",
+    "lat": 50.3579317,
+    "lon": 3.5234846
+  },
+  {
+    "original": "Guelders(?)",
+    "cleaned": "Guelders",
+    "geocoded_address": "Guelders, Lamer Lane, Lower Gustard Wood, Wheathampstead, St Albans, Hertfordshire, England, AL4 8RH, United Kingdom",
+    "lat": 51.8273421,
+    "lon": -0.2939657
+  },
+  {
+    "original": "Bologna",
+    "cleaned": "Bologna",
+    "geocoded_address": "Bologna, Emilia-Romagna, Italia",
+    "lat": 44.4938203,
+    "lon": 11.3426327
+  },
+  {
+    "original": "Central(?) France",
+    "cleaned": "Central",
+    "geocoded_address": "Central, Diliman, 4th District, Quezon City, Eastern Manila District, Metro Manila, 1100, Philippines",
+    "lat": 14.6446934,
+    "lon": 121.0504257
+  },
+  {
+    "original": "West Flanders",
+    "cleaned": "West Flanders",
+    "geocoded_address": "West-Vlaanderen, Vlaanderen, België / Belgique / Belgien",
+    "lat": 51.0404747,
+    "lon": 2.9994213
+  },
+  {
+    "original": "Den Bosch, Monastery Marienwater, Bridgettines/Bridgettinesses",
+    "cleaned": "Den Bosch",
+    "geocoded_address": "'s-Hertogenbosch, Noord-Brabant, Nederland",
+    "lat": 51.6889387,
+    "lon": 5.303116
+  },
+  {
+    "original": "Munster (diocese)",
+    "cleaned": "Munster",
+    "geocoded_address": "Münster, Nordrhein-Westfalen, Deutschland",
+    "lat": 51.9625101,
+    "lon": 7.6251879
+  },
+  {
+    "original": "The Hague, Convent of St. Mary in Galilee, Tertiaries",
+    "cleaned": "The Hague",
+    "geocoded_address": "Den Haag, Zuid-Holland, Nederland",
+    "lat": 52.0749456,
+    "lon": 4.2696802
+  },
+  {
+    "original": "Albergen, Monastery St. Anthoniusberg, Canons Regular",
+    "cleaned": "Albergen",
+    "geocoded_address": "Albergen, Tubbergen, Overijssel, Nederland",
+    "lat": 52.3708449,
+    "lon": 6.7637994
+  },
+  {
+    "original": "South(?) Holland",
+    "cleaned": "South",
+    "geocoded_address": "Département du Sud, Ayiti",
+    "lat": 18.2612839,
+    "lon": -73.8444985
+  },
+  {
+    "original": "Mainz",
+    "cleaned": "Mainz",
+    "geocoded_address": "Mainz, Rheinland-Pfalz, Deutschland",
+    "lat": 49.9995205,
+    "lon": 8.2736253
+  },
+  {
+    "original": "Northern Italy",
+    "cleaned": "Northern Italy",
+    "geocoded_address": "Italy Garage, KSS Road, Koinadugu District, Northern Province, Sierra Leone",
+    "lat": 9.578118,
+    "lon": -11.5525703
+  },
+  {
+    "original": "Valencia",
+    "cleaned": "Valencia",
+    "geocoded_address": "València, Comarca de València, València / Valencia, Comunitat Valenciana, España",
+    "lat": 39.4697065,
+    "lon": -0.3763353
+  },
+  {
+    "original": "Hesdin(?)",
+    "cleaned": "Hesdin",
+    "geocoded_address": "Hesdin, Hesdin-la-Forêt, Montreuil-sur-Mer, Pas-de-Calais, Hauts-de-France, France métropolitaine, 62140, France",
+    "lat": 50.3738145,
+    "lon": 2.038979
+  },
+  {
+    "original": "Hulsbergen (near Hattem), St. Hiëronymusberg (Fraterhuis), Brethren of the Common Life",
+    "cleaned": "Hulsbergen",
+    "geocoded_address": "Hulsbergen, Wapenveld, Heerde, Gelderland, Nederland, 8191 TC, Nederland",
+    "lat": 52.4331469,
+    "lon": 6.0777219
+  },
+  {
+    "original": "Southern Germany(?)",
+    "cleaned": "Southern Germany",
+    "geocoded_address": "Tyskland, Åstvej, Travbyen, Billund, Billund Kommune, Region Syddanmark, 7190, Danmark",
+    "lat": 55.7347652,
+    "lon": 9.1284731
+  },
+  {
+    "original": "Stralsund",
+    "cleaned": "Stralsund",
+    "geocoded_address": "Stralsund, Vorpommern-Rügen, Mecklenburg-Vorpommern, Deutschland",
+    "lat": 54.3096314,
+    "lon": 13.0820846
+  },
+  {
+    "original": "Western France",
+    "cleaned": "Western France",
+    "geocoded_address": "Western, D 914, Les Quinze Olius, Théza, Céret, Pyrénées-Orientales, Occitanie, France métropolitaine, 66200, France",
+    "lat": 42.6381444,
+    "lon": 2.9396437
+  },
+  {
+    "original": "Gent",
+    "cleaned": "Gent",
+    "geocoded_address": "Gent, Oost-Vlaanderen, Vlaanderen, België / Belgique / Belgien",
+    "lat": 51.0538286,
+    "lon": 3.7250121
+  },
+  {
+    "original": "Germany",
+    "cleaned": "Germany",
+    "geocoded_address": "Deutschland",
+    "lat": 51.1638175,
+    "lon": 10.4478313
+  },
+  {
+    "original": "Netherlands",
+    "cleaned": "Netherlands",
+    "geocoded_address": "Nederland",
+    "lat": 52.2434979,
+    "lon": 5.6343227
+  }
+]
