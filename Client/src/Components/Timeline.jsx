@@ -1,19 +1,19 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import Modal from "react-modal";
 import { FaExpand } from "react-icons/fa";
-import "./Timeline.css"; 
+import "./Timeline.css";
 
 Modal.setAppElement("#root");
 
 const scrollToNext = () => {
-    const nextSection = document.getElementById("featured");
-    if (nextSection) {
-        const top = nextSection.getBoundingClientRect().top + window.pageYOffset;
-        window.scrollTo({
-            top: top + 100, 
-            behavior: "smooth"
-        });
-    }
+  const nextSection = document.getElementById("featured");
+  if (nextSection) {
+    const top = nextSection.getBoundingClientRect().top + window.pageYOffset;
+    window.scrollTo({
+      top: top + 100,
+      behavior: "smooth",
+    });
+  }
 };
 
 const FIELDS = [
@@ -41,12 +41,14 @@ const CarouselTimelineScroll = () => {
   const [zoomImg, setZoomImg] = useState(null);
   const [visibleIndex, setVisibleIndex] = useState(0);
   const [animatedIndex, setAnimatedIndex] = useState(0);
+  const [hoveredYear, setHoveredYear] = useState(null); // New state for hover preview
 
   const rafId = useRef(null);
   const targetIndex = useRef(0);
   const currentAnimatedIndex = useRef(0);
   const isTicking = useRef(false);
   const scrollContainerRef = useRef(null);
+  const timelineBarRef = useRef(null); // Ref for the timeline bar
 
   useEffect(() => {
     fetch("https://api.northdev.xyz/api/manuscripts")
@@ -72,7 +74,11 @@ const CarouselTimelineScroll = () => {
 
     setVerluchtingenLoading((prev) => ({ ...prev, [m.identifier]: true }));
 
-    fetch(`https://api.northdev.xyz/api/Verluchtingen/bymanuscript/${encodeURIComponent(m.identifier)}`)
+    fetch(
+      `https://api.northdev.xyz/api/Verluchtingen/bymanuscript/${encodeURIComponent(
+        m.identifier
+      )}`
+    )
       .then((res) => res.json())
       .then((verl) => {
         setVerluchtingenMap((prev) => ({
@@ -93,18 +99,18 @@ const CarouselTimelineScroll = () => {
   }, [visibleIndex, allManuscripts, verluchtingenMap, verluchtingenLoading]);
 
   const animateCard = useCallback(() => {
-      const diff = targetIndex.current - currentAnimatedIndex.current;
-      if (Math.abs(diff) < 0.01) {
-        currentAnimatedIndex.current = targetIndex.current;
-        setAnimatedIndex(currentAnimatedIndex.current);
-        cancelAnimationFrame(rafId.current); 
-        rafId.current = null;
-        isTicking.current = false;
-        return;
-      }
-      currentAnimatedIndex.current += diff * SMOOTHING;
+    const diff = targetIndex.current - currentAnimatedIndex.current;
+    if (Math.abs(diff) < 0.01) {
+      currentAnimatedIndex.current = targetIndex.current;
       setAnimatedIndex(currentAnimatedIndex.current);
-      rafId.current = requestAnimationFrame(animateCard);
+      cancelAnimationFrame(rafId.current);
+      rafId.current = null;
+      isTicking.current = false;
+      return;
+    }
+    currentAnimatedIndex.current += diff * SMOOTHING;
+    setAnimatedIndex(currentAnimatedIndex.current);
+    rafId.current = requestAnimationFrame(animateCard);
   }, []);
 
   useEffect(() => {
@@ -118,23 +124,23 @@ const CarouselTimelineScroll = () => {
       );
 
       if (newIdx !== targetIndex.current) {
-         setVisibleIndex(newIdx); 
-         targetIndex.current = newIdx; 
+        setVisibleIndex(newIdx);
+        targetIndex.current = newIdx;
 
-         if (!rafId.current) { 
-            rafId.current = requestAnimationFrame(animateCard);
-         }
+        if (!rafId.current) {
+          rafId.current = requestAnimationFrame(animateCard);
+        }
       }
     };
 
     container.addEventListener("scroll", onScroll, { passive: true });
     return () => {
-       container.removeEventListener("scroll", onScroll);
-       if (rafId.current) {
-           cancelAnimationFrame(rafId.current); 
-       }
+      container.removeEventListener("scroll", onScroll);
+      if (rafId.current) {
+        cancelAnimationFrame(rafId.current);
+      }
     };
-  }, [allManuscripts.length, animateCard]); 
+  }, [allManuscripts.length, animateCard]);
 
   useEffect(() => {
     setAnimatedIndex(visibleIndex);
@@ -150,6 +156,66 @@ const CarouselTimelineScroll = () => {
       left: newIndex * SECTION_WIDTH,
       behavior: "smooth",
     });
+  };
+
+  // New functions for timeline bar interaction
+  const handleTimelineClick = (e) => {
+    if (!timelineBarRef.current || !allManuscripts.length) return;
+
+    const barRect = timelineBarRef.current.getBoundingClientRect();
+    const clickX = e.clientX - barRect.left; // X position relative to the bar
+
+    const timelineBarWidth = barRect.width;
+    const effectiveBarWidth =
+      timelineBarWidth - timelineLeftPad - timelineRightPad;
+
+    // Calculate the clicked percentage along the effective bar
+    const clickPercentage =
+      (clickX - timelineLeftPad) / effectiveBarWidth;
+
+    // Map the percentage to an index
+    const newIndex = Math.round(
+      clickPercentage * (allManuscripts.length - 1)
+    );
+
+    // Ensure the index is within bounds
+    const finalIndex = Math.max(
+      0,
+      Math.min(allManuscripts.length - 1, newIndex)
+    );
+
+    scrollContainerRef.current.scrollTo({
+      left: finalIndex * SECTION_WIDTH,
+      behavior: "smooth",
+    });
+  };
+
+  const handleTimelineMouseMove = (e) => {
+    if (!timelineBarRef.current || !allManuscripts.length) return;
+
+    const barRect = timelineBarRef.current.getBoundingClientRect();
+    const mouseX = e.clientX - barRect.left;
+
+    const timelineBarWidth = barRect.width;
+    const effectiveBarWidth =
+      timelineBarWidth - timelineLeftPad - timelineRightPad;
+
+    const mousePercentage = (mouseX - timelineLeftPad) / effectiveBarWidth;
+
+    // Check if mouse is within the effective bar area
+    if (mousePercentage >= 0 && mousePercentage <= 1) {
+      const potentialIndex = Math.round(
+        mousePercentage * (allManuscripts.length - 1)
+      );
+      const hoveredManu = allManuscripts[potentialIndex];
+      setHoveredYear(hoveredManu ? hoveredManu.year : null);
+    } else {
+      setHoveredYear(null);
+    }
+  };
+
+  const handleTimelineMouseLeave = () => {
+    setHoveredYear(null);
   };
 
   if (loading) return <div className="carousel-loading">Laden...</div>;
@@ -173,8 +239,12 @@ const CarouselTimelineScroll = () => {
 
         {/* Timeline Bar */}
         <div
+          ref={timelineBarRef} // Assign ref
           className="timeline-bar"
           style={{ width: timelineBarWidth, height: 36 }}
+          onClick={handleTimelineClick} // Add click handler
+          onMouseMove={handleTimelineMouseMove} // Add mouse move handler
+          onMouseLeave={handleTimelineMouseLeave} // Add mouse leave handler
         >
           <div
             className="timeline-bar-line"
@@ -198,6 +268,10 @@ const CarouselTimelineScroll = () => {
                 }}
               >
                 {isActive && <div className="timeline-year-popup">{manu.year}</div>}
+                {/* Show hovered year if it matches this dot's year and not active */}
+                {!isActive && hoveredYear && manu.year === hoveredYear && (
+                  <div className="timeline-year-preview">{manu.year}</div>
+                )}
               </div>
             );
           })}
@@ -228,14 +302,14 @@ const CarouselTimelineScroll = () => {
           style={{ height: scrollContainerHeight }}
         >
           {allManuscripts.map((manu, i) => {
-             const currentVerluchtingen = verluchtingenMap[manu.identifier] || [];
-             const isLoadingVerluchtingen = verluchtingenLoading[manu.identifier];
-             return (
+            const currentVerluchtingen = verluchtingenMap[manu.identifier] || [];
+            const isLoadingVerluchtingen = verluchtingenLoading[manu.identifier];
+            return (
               <section
                 key={manu.identifier}
                 className="carousel-center double-card"
                 id={`manuscript-${i}`}
-                style={{ height: availableHeight }} 
+                style={{ height: availableHeight }}
               >
                 {/* Kaart 1: Manuscripten */}
                 <div className="carousel-card" tabIndex={0}>
@@ -284,77 +358,76 @@ const CarouselTimelineScroll = () => {
 
                 {/* Kaart 2: Verluchtingen */}
                 <div className="verluchtingen-card clean">
-                    <div className="verluchtingen-header">
-                        <span className="verluchtingen-title">Verluchtingen</span>
-                        {currentVerluchtingen.length > 1 && (
-                        <span className="verluchtingen-count-pill">
-                            Bevat meerdere verluchtingen
-                        </span>
-                        )}
-                    </div>
+                  <div className="verluchtingen-header">
+                    <span className="verluchtingen-title">Verluchtingen</span>
+                    {currentVerluchtingen.length > 1 && (
+                      <span className="verluchtingen-count-pill">
+                        Bevat meerdere verluchtingen
+                      </span>
+                    )}
+                  </div>
 
-                    <div className="verluchtingen-grid-wrapper">
-                        {isLoadingVerluchtingen ? (
-                            <div className="verluchtingen-empty">
-                                Loading verluchtingen…
-                            </div>
-                        ) : currentVerluchtingen.length === 0 ? (
-                            <div className="verluchtingen-empty">
-                                No verluchtingen with images for this manuscript.
-                            </div>
-                        ) : (
-                            <div className="verluchtingen-grid-container">
-                                {currentVerluchtingen
-                                .filter((v) => v.identifier || v.illustration)
-                                .map((v, vIdx) => (
-                                    <div
-                                    key={vIdx}
-                                    className="verluchtingen-grid-item"
-                                    tabIndex={0}
-                                    onClick={() => setZoomImg(v.identifier || v.illustration)}
-                                    title="Click to zoom"
-                                    >
-                                    <div className="verluchtingen-image-wrapper">
-                                        <img
-                                        src={v.identifier || v.illustration}
-                                        alt={v.title || "Verluchting"}
-                                        className="verluchtingen-grid-image"
-                                        draggable={false}
-                                        loading="lazy"
-                                        />
-                                        <div className="verluchtingen-zoom-indicator">
-                                        <FaExpand />
-                                        </div>
+                  <div className="verluchtingen-grid-wrapper">
+                    {isLoadingVerluchtingen ? (
+                      <div className="verluchtingen-empty">
+                        Loading verluchtingen…
+                      </div>
+                    ) : currentVerluchtingen.length === 0 ? (
+                      <div className="verluchtingen-empty">
+                        No verluchtingen with images for this manuscript.
+                      </div>
+                    ) : (
+                      <div className="verluchtingen-grid-container">
+                        {currentVerluchtingen
+                          .filter((v) => v.identifier || v.illustration)
+                          .map((v, vIdx) => (
+                            <div
+                              key={vIdx}
+                              className="verluchtingen-grid-item"
+                              tabIndex={0}
+                              onClick={() => setZoomImg(v.identifier || v.illustration)}
+                              title="Click to zoom"
+                            >
+                              <div className="verluchtingen-image-wrapper">
+                                <img
+                                  src={v.identifier || v.illustration}
+                                  alt={v.title || "Verluchting"}
+                                  className="verluchtingen-grid-image"
+                                  draggable={false}
+                                  loading="lazy"
+                                />
+                                <div className="verluchtingen-zoom-indicator">
+                                  <FaExpand />
+                                </div>
+                              </div>
+                              <div className="verluchtingen-item-details">
+                                <div className="verluchtingen-item-content">
+                                  {v.title && (
+                                    <div className="verluchtingen-item-title">
+                                      {v.title}
                                     </div>
-                                    <div className="verluchtingen-item-details">
-                                        <div className="verluchtingen-item-content">
-                                        {v.title && (
-                                            <div className="verluchtingen-item-title">
-                                            {v.title}
-                                            </div>
-                                        )}
-                                        {v.folio && (
-                                            <div className="verluchtingen-item-folio">
-                                            {v.folio}
-                                            </div>
-                                        )}
-                                        </div>
-                                        <div className="verluchtingen-item-index">
-                                        {vIdx + 1}
-                                        </div>
+                                  )}
+                                  {v.folio && (
+                                    <div className="verluchtingen-item-folio">
+                                      {v.folio}
                                     </div>
-                                    </div>
-                                ))}
+                                  )}
+                                </div>
+                                <div className="verluchtingen-item-index">
+                                  {vIdx + 1}
+                                </div>
+                              </div>
                             </div>
-                        )}
-                    </div>
+                          ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
               </section>
             );
           })}
         </div>
-        <p>Scroll horizontaal, of gebruik de navigatie knoppen om door de tijdlijn te gaan.</p>
-        
+         <p>Scroll horizontaal, of gebruik de navigatie knoppen om door de tijdlijn te gaan.</p>
       </div>
       {/* Modal for Zooming */}
       <Modal
