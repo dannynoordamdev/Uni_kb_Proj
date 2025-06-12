@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/danny/Uni_kb_proj/Server/Server.csproj": {}
+    "C:\\Users\\danny\\Desktop\\Uni_kb_Proj\\Server\\Server.csproj": {}
   },
   "projects": {
-    "/home/danny/Uni_kb_proj/Server/Server.csproj": {
+    "C:\\Users\\danny\\Desktop\\Uni_kb_Proj\\Server\\Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/danny/Uni_kb_proj/Server/Server.csproj",
+        "projectUniqueName": "C:\\Users\\danny\\Desktop\\Uni_kb_Proj\\Server\\Server.csproj",
         "projectName": "Server",
-        "projectPath": "/home/danny/Uni_kb_proj/Server/Server.csproj",
-        "packagesPath": "/home/danny/.nuget/packages/",
-        "outputPath": "/home/danny/Uni_kb_proj/Server/obj/",
+        "projectPath": "C:\\Users\\danny\\Desktop\\Uni_kb_Proj\\Server\\Server.csproj",
+        "packagesPath": "C:\\Users\\danny\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\danny\\Desktop\\Uni_kb_Proj\\Server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/danny/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\danny\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -91,7 +91,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/opt/dotnet/sdk/8.0.410/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.410/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

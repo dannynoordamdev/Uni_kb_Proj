@@ -2,7 +2,6 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   server: {
-    allowedHosts: ['kb.northdev.xyz', 'localhost', '127.0.0.1'],
     proxy: {
       '/api': {
         target: 'http://localhost:8111',

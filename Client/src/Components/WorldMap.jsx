@@ -66,7 +66,7 @@ const WorldMap = () => {
   };
 
   useEffect(() => {
-    fetch("https://api.northdev.xyz/api/manuscripts")
+    fetch("/api/manuscripts")
       .then((res) => res.json())
       .then((data) => {
         const cleaned = data
@@ -117,7 +117,7 @@ const WorldMap = () => {
           [m.identifier]: true,
         }));
         fetch(
-          `https://api.northdev.xyz/api/Verluchtingen/bymanuscript/${encodeURIComponent(
+          `/api/Verluchtingen/bymanuscript/${encodeURIComponent(
             m.identifier
           )}`
         )
