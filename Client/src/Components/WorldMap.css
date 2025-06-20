@@ -460,3 +460,23 @@
     right: 8px;
   }
 }
+
+.img-fallback {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: #f5eeef;
+  text-align: center;
+  color: #211b1c;
+  height: 150px;
+  width: 100%;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 0.95rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+

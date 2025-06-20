@@ -1,6 +1,6 @@
 import React from "react";
 import "./Herotimeline.css"; // Zorg ervoor dat je het CSS-bestand importeert
-import manuscriptImage from 'C:/Users/danny/Desktop/Uni_kb_Proj/Client/src/assets/two.jpg';
+import manuscriptImage from 'C:/Users/danny/OneDrive/Desktop/Uni_kb_Proj/Client/src/assets/two.jpg';
 
 const scrollToNext = () => {
   const nextSection = document.getElementById("timeline-section");

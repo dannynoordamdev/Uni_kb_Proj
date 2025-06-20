@@ -5,6 +5,7 @@ import { FaExpand } from "react-icons/fa";
 import "leaflet/dist/leaflet.css";
 import "./WorldMap.css";
 
+
 Modal.setAppElement("#root");
 
 const europeBounds = {
@@ -239,12 +240,23 @@ const WorldMap = () => {
                               }}
                               title="Klik om te vergroten"
                             >
-                              <img
-                                src={v.identifier || v.illustration}
-                                alt={v.title || "Verluchting"}
-                                className="verluchting-img modern"
-                                loading="lazy"
-                              />
+                            <img
+                            src={v.identifier || v.illustration}
+                            alt={v.title || "Verluchting"}
+                            className="verluchting-img modern"
+                            loading="lazy"
+                            onError={e => {
+                              e.target.onerror = null;
+                              e.target.src = "";
+                              e.target.style.background = "#f8d7da";
+                              e.target.style.display = "none";
+                              e.target.parentNode.querySelector('.img-fallback').style.display = 'flex';
+                            }}
+                          />
+                          <div className="img-fallback">
+                            Afbeelding tijdlijk niet beschikbaar
+                          </div>
+
                               <div className="verluchting-zoom">
                                 <FaExpand />
                               </div>

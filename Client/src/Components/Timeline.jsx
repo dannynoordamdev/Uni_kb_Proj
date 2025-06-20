@@ -543,7 +543,6 @@ const CarouselTimelineScroll = () => {
             );
           })}
         </div>
-          <p>Scroll horizontaal, of gebruik de navigatie knoppen om door de tijdlijn te gaan.</p>
       </div>
       {/* Modal for Zooming */}
       <Modal
