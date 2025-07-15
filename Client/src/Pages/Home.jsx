@@ -1,8 +1,8 @@
-import WorldMap from '../Components/WorldMap';
 import Footer from '../Components/Footer';
 import Hero from '../Components/Hero';
 import '../Pages/Home.css';
 import React from 'react';
+import WorldMap from '../Components/WorldMap';
 
 
 const Home = () => {
@@ -13,6 +13,8 @@ const Home = () => {
             <div className="full-width-section" id="home">
                 <Hero />
             </div> 
+
+            <WorldMap/>
             
             {/* Footer */}
             <div id="footer">

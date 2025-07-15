@@ -68,7 +68,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    /* overflow: hidden; */ /* Deze regel is verwijderd */
     background-image: linear-gradient(to right, #273d5a, #122a46);
     flex-grow: 1;
 }
